@@ -1,5 +1,5 @@
 {
-  "name": "digital-products-boosters",
+  "name": "digital-product-boosters-react-beginner-meeting-1",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,17 +8,12 @@
     "react-scripts": "3.0.1"
   },
   "scripts": {
+    "react-scripts": "react-scripts",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "mdx-deck": "mdx-deck",
-    "build-slides": "node scripts/build-slides.js",
-    "start-slides": "node scripts/start-slides.js",
-    "predeploy": "yarn build && yarn build-slides",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
-  "homepage": "https://github.com/digital-products-boosters",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -35,7 +30,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1",
-    "mdx-deck": "^2.5.0"
+    "@testing-library/react": "^8.0.5"
   }
 }

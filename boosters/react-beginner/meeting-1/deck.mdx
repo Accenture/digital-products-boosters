@@ -1,0 +1,282 @@
+import { MinuteTimer } from "../../../src/components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "../theme.js";
+
+# Beginner React - Meeting 1
+
+1. [Reading 📕](/1)
+2. [Setup 🛠](/2)
+3. [Discussion Questions 🤔](/3)
+4. [Exercises 💪🏼](/11)
+
+---
+
+## Reading 📕
+
+1. [React Docs - Hello World](https://reactjs.org/docs/hello-world.html)
+2. [React Docs - Introducing JSX](https://reactjs.org/docs/introducing-jsx.html)
+3. [React Docs - Rendering Elements](https://reactjs.org/docs/rendering-elements.html)
+4. [React Docs - Component and Props](https://reactjs.org/docs/components-and-props.html)
+5. [React Docs - Conditional Rendering (Skip - Element Variables Section)](https://reactjs.org/docs/conditional-rendering.html)
+6. [React Docs - Lists and Keys](https://reactjs.org/docs/lists-and-keys.html)
+
+---
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/react-beginner/meeting-1
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn test # you should see failing tests
+```
+
+---
+
+# Discussion Questions 🤔
+
+---
+
+# Discussion Question #1
+
+What is JSX? Can you write React without using JSX?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+JSX is a syntax that allows developers write code that creates React elements
+in a more visual and intuitive manner. JSX transpiles to JavaScript, so it's
+possible to write React without JSX altogether.
+
+Check out the next slide to see a side by side comparison of writing a
+component with and without JSX.
+
+---
+
+<Split>
+
+<!-- prettier-ignore -->
+```javascript
+import React from "react";
+
+const App = () => (
+  <div>
+    <header>
+      <h1>My App</h1>
+    </header>
+    <main>
+      <p>this is my app</p> 
+    </main>
+  </div>
+);
+```
+
+<!-- prettier-ignore -->
+```javascript
+import React from "react";
+const cE =
+  React.createElement;
+
+const App = () =>
+  cE("div", {},
+    cE("header", {},
+      cE("h1", {}, "My App")
+    ),
+    cE("main", {},
+      cE("p", {}, "content")
+    )
+  );
+```
+
+</Split>
+
+---
+
+# Discussion Question #2
+
+What are props? What does it mean for props to be read-only?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #2 - Answer
+
+Props are data that is used by the component to render. Props should be
+treated as read-only, so they should not be mutated (i.e. if a prop is an
+array, then we shouldn't call `push` on it because it mutates the array)
+because props may be used by multiple components, and therefore mutating
+props may lead to out-of-sync and/or incorrect component rendering outputs.
+
+If props need to be manipulated, then a new object should be created with previous
+properties copied over as desired (i.e. create a new array with all the
+previous array elements plus a new element).
+
+---
+
+# Discussion Question #3
+
+What is the purpose of the `key` prop in lists? What is an example of one bad value and one good value for a key prop?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+The `key` prop allows React to uniquely identify a specific element in a
+list. If the list is ever re-ordered, then React can use the `key` prop to
+properly associate state with a specific element even if the list is
+re-ordered. (State will be covered in a subsequent meeting)
+
+A bad value for the `key` prop is the index value of the element in the list
+because the value might change for a particular element if the list is ever
+re-ordered. A good value for the `key` prop is a database primary key because
+those tend to uniquely identify a specific record.
+
+---
+
+# Exercises 💪🏼
+
+---
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 0 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/7085f5282a8dbf10eefbc32ee98b581c79b2e35d)
+
+---
+
+# Exercise 1
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-1.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/cabc55597de0737a705cee586fedf8743259a784)
+
+---
+
+# Exercise 2
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-2.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/14bf4955d2277668b309fa359c447389401f6587)
+
+---
+
+# Exercise 3
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-3.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 3 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/79421bf15c84fa6ba3f930fa647528727ba2a267)
+
+---
+
+# Exercise 4
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-4.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 4 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/592c6523ff590e3e3e30aa8aab642b5ccf999411)
+
+---
+
+# Exercise 5
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-5.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 5 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/a04ad8911d63c4258ab34dc79d16b13d4dc2175c)
+
+---
+
+# Exercise 6
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-6.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 6 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/fbb2b03b74aea015020d5e7c8e05ee7607a8cf1a)
