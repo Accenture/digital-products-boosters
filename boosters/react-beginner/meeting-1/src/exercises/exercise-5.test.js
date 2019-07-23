@@ -2,7 +2,7 @@ import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import NewsItem from "../components/news-item";
 
-xdescribe("Exercise 5 - NewsItem component", () => {
+describe("Exercise 5 - NewsItem component", () => {
   const renderComponent = props => render(<NewsItem {...props} />);
 
   afterEach(cleanup);
