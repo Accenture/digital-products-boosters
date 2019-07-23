@@ -1,8 +1,0 @@
-.root {
-  display: flex;
-  flex-direction: column;
-}
-
-.textComments {
-  font-weight: bold;
-}
