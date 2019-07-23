@@ -2,7 +2,7 @@ import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import NewsText from "../components/news-text";
 
-xdescribe("Exercise 2 - NewsText component", () => {
+describe("Exercise 2 - NewsText component", () => {
   const renderComponent = props => render(<NewsText {...props} />);
   let commentText, props;
 
