@@ -1,0 +1,56 @@
+{
+  "newsItems": [
+    {
+      "comments": [],
+      "favorited": false,
+      "id": "b671f792-e209-4795-bebe-7ebaadc2e5db",
+      "postedAt": "2019-07-16T21:43:54.209Z",
+      "text": "Doggo rated 12 out of 10!",
+      "typename": "NewsText"
+    },
+    {
+      "comments": [],
+      "favorited": true,
+      "id": "ad5544e8-ec22-4849-af16-b39b8a9b1b4f",
+      "imageUrl": "https://live.staticflickr.com/371/31905345324_d5dd230dfa_b.jpg",
+      "postedAt": "2019-07-16T21:43:54.209Z",
+      "title": "face of dog on beach",
+      "typename": "NewsImage"
+    },
+    {
+      "typename": "NewsText",
+      "text": "Scientifically proven that all doggos are good dogs!",
+      "favorited": false,
+      "postedAt": "2019-07-16T21:43:54.209Z",
+      "id": "3dfd8c5c-310b-41cd-b304-18b3c55513f6",
+      "comments": [
+        {
+          "id": "6343782c-ada4-4a23-91dd-54d5d5e449ef",
+          "text": "I always knew it in my ❤️",
+          "user": {
+            "id": "52cea742-1678-48d7-b014-4de756f86646",
+            "firstName": "John",
+            "lastName": "Smith"
+          }
+        },
+        {
+          "id": "c550698d-fb5d-4b56-8999-2b7642b3865e",
+          "text": "🎉🎉🎉",
+          "user": {
+            "id": "b5009a9a-572d-487c-b71a-676fcfac2887",
+            "firstName": "Bob",
+            "lastName": "Rudd"
+          }
+        }
+      ]
+    },
+    {
+      "comments": [],
+      "favorited": "false",
+      "id": "6343782c-ada4-4a23-91dd-54d5d5e449ef",
+      "title": "Adorable doggos",
+      "typename": "NewsVideo",
+      "videoUrl": "https://www.youtube.com/embed/3z2EzQvpbok"
+    }
+  ]
+}
