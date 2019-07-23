@@ -3,7 +3,7 @@ import { cleanup, render } from "@testing-library/react";
 import CommentsSection from "../components/comments-section";
 import { text } from "../components/comments-section/utils";
 
-xdescribe("Exercise 1 - CommentsSection component", () => {
+describe("Exercise 1 - CommentsSection component", () => {
   const renderComponent = props => render(<CommentsSection {...props} />);
   let props;
 
