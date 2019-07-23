@@ -2,7 +2,7 @@ import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import NewsVideo from "../components/news-video";
 
-xdescribe("Exercise 4 - NewsVideo component", () => {
+describe("Exercise 4 - NewsVideo component", () => {
   const renderComponent = props => render(<NewsVideo {...props} />);
   let commentText, props;
 
