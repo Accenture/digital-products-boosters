@@ -2,7 +2,7 @@ import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import App from "../components/app";
 
-xdescribe("Exercise 6 - App component", () => {
+describe("Exercise 6 - App component", () => {
   const renderComponent = props => render(<App {...props} />);
   let newsTextText, newsImageTitle, newsVideoTitle, props;
 
