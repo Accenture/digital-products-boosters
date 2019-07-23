@@ -2,7 +2,7 @@ import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import NewsImage from "../components/news-image";
 
-xdescribe("Exercise 3 - NewsImage component", () => {
+describe("Exercise 3 - NewsImage component", () => {
   const renderComponent = props => render(<NewsImage {...props} />);
   let commentText, props;
 
