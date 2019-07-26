@@ -1,0 +1,62 @@
+.root {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.headerSection {
+  padding: 0 80px;
+}
+
+.header1 {
+  color: var(--dp-blue-three);
+  font-size: 96px;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.header1End {
+  color: var(--dp-yellow-one);
+}
+
+.main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.boosterName {
+  color: var(--gray-dark);
+  font-size: 26px;
+}
+
+.meetingList {
+  list-style: none;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.meetingListItem {
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.meetingListIcon {
+  color: var(--dp-yellow-one);
+  margin-right: 5px;
+}
+
+.meetingLink {
+  color: var(--dp-blue-one);
+  text-decoration: none;
+}
+
+.meetingLink:hover {
+  color: var(--dp-blue-two);
+}
+
+.github {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}

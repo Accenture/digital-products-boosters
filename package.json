@@ -13,9 +13,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mdx-deck": "mdx-deck",
-    "build-slides": "node scripts/build-slides.js",
     "start-slides": "node scripts/start-slides.js",
-    "predeploy": "yarn build && yarn build-slides",
+    "build-slides": "yarn mdx-deck build",
+    "upload-slides": "aws s3 sync dist --profile intrepid-webservices",
+    "deploy-slides": "node scripts/deploy-slides.js",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
   "homepage": "https://github.com/digital-products-boosters",
