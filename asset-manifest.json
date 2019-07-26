@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/digital-products-boosters/static/css/main.1417bbf5.chunk.css",
-    "main.js": "/digital-products-boosters/static/js/main.6f003b25.chunk.js",
-    "main.js.map": "/digital-products-boosters/static/js/main.6f003b25.chunk.js.map",
+    "main.css": "/digital-products-boosters/static/css/main.09fef8b6.chunk.css",
+    "main.js": "/digital-products-boosters/static/js/main.493a8707.chunk.js",
+    "main.js.map": "/digital-products-boosters/static/js/main.493a8707.chunk.js.map",
     "runtime~main.js": "/digital-products-boosters/static/js/runtime~main.171a4d46.js",
     "runtime~main.js.map": "/digital-products-boosters/static/js/runtime~main.171a4d46.js.map",
-    "static/js/2.3310f33a.chunk.js": "/digital-products-boosters/static/js/2.3310f33a.chunk.js",
-    "static/js/2.3310f33a.chunk.js.map": "/digital-products-boosters/static/js/2.3310f33a.chunk.js.map",
+    "static/js/2.8661e072.chunk.js": "/digital-products-boosters/static/js/2.8661e072.chunk.js",
+    "static/js/2.8661e072.chunk.js.map": "/digital-products-boosters/static/js/2.8661e072.chunk.js.map",
     "index.html": "/digital-products-boosters/index.html",
-    "precache-manifest.aa3695e2cc644b5eb88dd5568d9fa7ef.js": "/digital-products-boosters/precache-manifest.aa3695e2cc644b5eb88dd5568d9fa7ef.js",
+    "precache-manifest.8c34475be4438070604e401f873444ff.js": "/digital-products-boosters/precache-manifest.8c34475be4438070604e401f873444ff.js",
     "service-worker.js": "/digital-products-boosters/service-worker.js",
-    "static/css/main.1417bbf5.chunk.css.map": "/digital-products-boosters/static/css/main.1417bbf5.chunk.css.map"
+    "static/css/main.09fef8b6.chunk.css.map": "/digital-products-boosters/static/css/main.09fef8b6.chunk.css.map",
+    "static/media/index.css": "/digital-products-boosters/static/media/Graphik-Normal.93cb8342.ttf"
   }
 }
