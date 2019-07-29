@@ -1,0 +1,37 @@
+.root {
+  margin: 20px;
+  width: 150px;
+}
+
+.button {
+  background: none;
+  border: 2px solid rgb(61, 92, 128);
+  border-radius: 5px;
+  color: rgb(61, 92, 128);
+  font-size: 18px;
+  font-weight: bold;
+  height: 50px;
+  width: 100%;
+}
+
+.content {
+  border: 1px solid grey;
+  margin-top: 5px;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link {
+  color: rgb(61, 92, 128);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

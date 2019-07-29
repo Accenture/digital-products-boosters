@@ -1,0 +1,19 @@
+.root {
+  border: 1px solid black;
+  margin: 20px;
+  padding: 10px 30px;
+  width: 300px;
+}
+
+.root h1 {
+  font-size: 20px;
+}
+
+.root input,
+.root select {
+  margin: 0 5px;
+}
+
+.root button {
+  margin-top: 5px;
+}

@@ -1,0 +1,32 @@
+.root {
+  border: 1px solid #c40d11;
+  font-size: 20px;
+  list-style: none;
+  margin: 20px;
+  padding: 0;
+  width: 200px;
+}
+
+.rootTab {
+  border-bottom: 3px solid black;
+  background-color: #c40d11;
+  color: white;
+}
+
+.rootTab:last-child {
+  border-bottom: none;
+}
+
+.rootTab button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  width: 100%;
+}
+
+.rootTab div {
+  background: white;
+  color: black;
+  padding: 20px;
+  text-align: center;
+}

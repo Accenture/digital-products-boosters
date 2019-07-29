@@ -14,7 +14,7 @@ export const makeTimeLeftShown = ({ minutesLeftShown, secondsLeftShown }) => {
   const areMinutesLeft = minutesLeftShown !== 0;
   return `${areMinutesLeft ? minutesLeftShown : ""}${
     areMinutesLeft ? ":" : ""
-  }${secondsLeftShown === 0 ? "00" : secondsLeftShown}${
+  }${secondsLeftShown < 10 ? `0${secondsLeftShown}` : secondsLeftShown}${
     areMinutesLeft ? "" : " seconds"
   }`;
 };

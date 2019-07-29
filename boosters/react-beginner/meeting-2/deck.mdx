@@ -1,0 +1,214 @@
+import { MinuteTimer } from "../../../src/components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "../theme.js";
+import { Link } from "@reach/router";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## Beginner React - Meeting 2
+
+<ol>
+  <li>
+    <Link to="/1">Reading 📕</Link>
+  </li>
+  <li>
+    <Link to="/2">Setup 🛠</Link>
+  </li>
+  <li>
+    <Link to="/3">Discussion Questions 🤔</Link>
+  </li>
+  <li>
+    <Link to="/12">Exercises 💪🏼</Link>
+  </li>
+</ol>
+
+---
+
+## Reading 📕
+
+1. [React Docs - Handling Events](https://reactjs.org/docs/handling-events.html)
+2. [React Docs - Introducing Hooks (**skip if you're new to React**)](https://reactjs.org/docs/hooks-intro.html)
+3. [React Docs - Using the State Hook](https://reactjs.org/docs/hooks-state.html)
+4. [React Docs - Hooks API Reference (**only useReducer section**)](https://reactjs.org/docs/hooks-reference.html#usereducer)
+5. [Dave Ceddia - 4 Examples of the _useState_ Hook](https://daveceddia.com/usestate-hook-examples/)
+6. [CSS Tricks - Getting to Know the _useReducer_ React Hook](https://css-tricks.com/getting-to-know-the-usereducer-react-hook/)
+7. [React Docs - Forms](https://reactjs.org/docs/forms.html)
+
+---
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/react-beginner/meeting-2
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn test # you should see failing tests
+```
+
+---
+
+# Discussion Questions 🤔
+
+---
+
+# Discussion Question #1
+
+What are the similarities and difference between props and state?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer Pt. 1
+
+Props and state are both data which your component utilizes to render its
+output.
+
+They should both **not** be mutated directly. If this guideline is followed,
+components become deterministic which means that given the same props and
+state, a component renders the same output.
+
+---
+
+# Discussion Question #1 - Answer Pt. 2
+
+State is declared in a component and can be updated immutably through a
+callback function (i.e. `setState` in `useState` or `dispatch` in
+`useReducer`). State usually represents data that changes in response to
+certain events (i.e. user clicks, passage of time, etc.)
+
+Props are always passed to a component.
+
+---
+
+# Discussion Question #2
+
+How would you decided between using the `useState` hook vs the `useReducer`
+hook?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #2 - Answer
+
+It depends on how complex your overall state is. The following are some factors to consider:
+
+- Number of states
+  - _Are a lot of `useState` hooks present?_
+- Number of update state callbacks passed down
+  - _Are a lot of `setState` callbacks being passed down as props?_
+- Co-dependency of state
+  - _Does updating a piece of state depend on the value of another piece of state?_
+  - _Are pieces of state frequently updated together?_
+
+The more "yes" answers that you have, the more you should favor using `useReducer`
+
+---
+
+# Discussion Question #3
+
+**Skip this question if you're new to React**
+
+What are the benefits of hooks? Is there anything we can build now that we
+could not before?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer Pt. 1
+
+Everything that can be built with hooks can be done without hooks in React.
+However, a lot of pain points have now been addressed.
+
+Previously, to share code between components you would either use
+Higher-Order Components or Render Props. These patterns added a lot of
+complexity. Luckily, hooks allow us to replace these patterns with simple
+functions.
+
+---
+
+# Discussion Question #3 - Answer Pt. 2
+
+The component lifecycle was also confusing to a lot of developers. For
+example, `componentWillReceiveProps` was often mis-used and there were a lot
+of bugs caused by forgetting to handle prop changes in `componentDidUpdate`.
+The `useEffect` hook (which will be covered in the next meeting) simplifies
+and cosolidates this logic.
+
+Also, classes in JavaScript have a lot of gotchas (i.e. `this`). While it's
+important to learn these features, functions are much more robust. Functions
+are easier to test, statically type, and reason about.
+
+---
+
+# Exercises 💪🏼
+
+_N.B. You should be able to build the following components by getting the tests to pass. However, you can also run `yarn start` and go to [your local server](http://localhost:3000) to see what you're building_
+
+---
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 0 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/7085f5282a8dbf10eefbc32ee98b581c79b2e35d)
+
+---
+
+# Exercise 1
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-1.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={15} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/cabc55597de0737a705cee586fedf8743259a784)
+
+---
+
+# Exercise 2
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-2.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={20} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/14bf4955d2277668b309fa359c447389401f6587)
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️
