@@ -1,32 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import classNames from "./class-names.module.css";
 
-const DisclosureBase = ({ isOpen, links, name, toggle }) => (
+const DisclosureBase = ({ links, name }) => (
   <div className={classNames.root}>
-    <button className={classNames.button} onClick={toggle}>
-      {name}
-    </button>
-    {isOpen && (
-      <div className={classNames.content}>
-        <ul className={classNames.list}>
-          {links.map(({ href, text }) => (
-            <li className={classNames.listItem} key={text}>
-              <a className={classNames.link} href={href}>
-                {text}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
+    <button className={classNames.button}>{name}</button>
+    <div className={classNames.content}>
+      <ul className={classNames.list}>
+        {links.map(({ href, text }) => (
+          <li className={classNames.listItem} key={text}>
+            <a className={classNames.link} href={href}>
+              {text}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   </div>
 );
 
 const Disclosure = props => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(previousState => !previousState);
-
-  const baseProps = { ...props, isOpen, toggle };
+  const baseProps = { ...props };
   return <DisclosureBase {...baseProps} />;
 };
 
