@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useReducer } from "react";
 import classNames from "./class-names.module.css";
 
 export const facilities = [
@@ -32,15 +32,35 @@ export const text = {
 
 const BlankOption = () => <option disabled hidden />;
 
-const PetAdoptionFormBase = ({ pets }) => (
+const PetAdoptionFormBase = ({
+  fullName,
+  isSubmitDisabled,
+  onChangeFacility,
+  onChangeFullName,
+  onChangePet,
+  onSubmit,
+  pets,
+  selectedFacilityId,
+  selectedPetId
+}) => (
   <div className={classNames.root}>
-    <form>
+    <form onSubmit={onSubmit}>
       <h1>{text.adoptionForm}</h1>
       <label htmlFor="fullName">{text.fullName}</label>
-      <input id="fullName" name="fullName" />
+      <input
+        id="fullName"
+        name="fullName"
+        onChange={onChangeFullName}
+        value={fullName}
+      />
       <div>
         <label htmlFor="facility">{text.facility}</label>
-        <select id="facility" name="facility">
+        <select
+          id="facility"
+          name="facility"
+          onChange={onChangeFacility}
+          value={selectedFacilityId}
+        >
           <BlankOption />
           {facilities.map(({ id, city }) => (
             <option key={id} value={id}>
@@ -49,7 +69,12 @@ const PetAdoptionFormBase = ({ pets }) => (
           ))}
         </select>
         <label htmlFor="pet">{text.pet}</label>
-        <select id="pet" name="pet">
+        <select
+          id="pet"
+          name="pet"
+          onChange={onChangePet}
+          value={selectedPetId}
+        >
           <BlankOption />
           {pets.map(({ id, name }) => (
             <option key={id} value={id}>
@@ -58,13 +83,81 @@ const PetAdoptionFormBase = ({ pets }) => (
           ))}
         </select>
       </div>
-      <button>{text.adopt}</button>
+      <button disabled={isSubmitDisabled}>{text.adopt}</button>
     </form>
   </div>
 );
 
+const petAdoptionFormInitialState = {
+  fullName: "",
+  selectedFacilityId: "",
+  selectedPetId: ""
+};
+
+const petAdoptionFormReducer = (state, { type, payload }) => {
+  switch (type) {
+    case "CHANGE_FACILITY":
+      return { ...state, selectedFacilityId: payload, selectedPetId: "" };
+    case "CHANGE_FULL_NAME":
+      return { ...state, fullName: payload };
+    case "CHANGE_PET":
+      return { ...state, selectedPetId: payload };
+    case "SUBMIT_FORM":
+      return petAdoptionFormInitialState;
+    default:
+      return state;
+  }
+};
+
 const PetAdoptionForm = props => {
-  const baseProps = { ...props, pets: [] };
+  const [petAdoptionFormState, dispatch] = useReducer(
+    petAdoptionFormReducer,
+    petAdoptionFormInitialState
+  );
+
+  const onChangeFullName = event =>
+    dispatch({
+      payload: event.target.value,
+      type: "CHANGE_FULL_NAME"
+    });
+
+  const onChangeFacility = event =>
+    dispatch({
+      payload: event.target.value,
+      type: "CHANGE_FACILITY"
+    });
+
+  const onChangePet = event =>
+    dispatch({
+      payload: event.target.value,
+      type: "CHANGE_PET"
+    });
+
+  const onSubmit = event => {
+    event.preventDefault();
+
+    dispatch({ type: "SUBMIT_FORM" });
+    alert(text.success);
+  };
+
+  const isSubmitDisabled = [
+    "fullName",
+    "selectedFacilityId",
+    "selectedPetId"
+  ].some(stateName => petAdoptionFormState[stateName] === "");
+
+  const pets = petsByFacilityId[petAdoptionFormState.selectedFacilityId] || [];
+
+  const baseProps = {
+    ...petAdoptionFormState,
+    facilities,
+    isSubmitDisabled,
+    onChangeFacility,
+    onChangeFullName,
+    onChangePet,
+    onSubmit,
+    pets
+  };
 
   return <PetAdoptionFormBase {...baseProps} />;
 };

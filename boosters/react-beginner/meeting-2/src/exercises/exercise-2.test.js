@@ -39,7 +39,7 @@ const submitForm = ({ getByText }) => {
 };
 
 // Example https://digital-products-boosters-react-beginner-meeting-2.s3.amazonaws.com/exercise-2.gif
-xdescribe("Exercise 2 - PetAdoptionForm component", () => {
+describe("Exercise 2 - PetAdoptionForm component", () => {
   const renderComponent = () => render(<PetAdoptionForm />);
 
   afterEach(cleanup);
