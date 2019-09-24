@@ -3,7 +3,7 @@ import { fireEvent, cleanup, render } from "@testing-library/react";
 import Accordion from "../components/accordion";
 
 // Example https://digital-products-boosters-react-beginner-meeting-2.s3.amazonaws.com/exercise-1.gif
-xdescribe("Exercise 1 - Accordion component", () => {
+describe("Exercise 1 - Accordion component", () => {
   const renderComponent = props => render(<Accordion {...props} />);
   let props;
 
