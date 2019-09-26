@@ -33,5 +33,8 @@ export const theme = syntaxHighlighterPrism({
     link,
     pre: white,
     preBackground: black
+  },
+  Slide: {
+    padding: "0 10px"
   }
 });
