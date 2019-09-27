@@ -12,11 +12,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "mdx-deck": "mdx-deck",
-    "start-slides": "node scripts/start-slides.js",
-    "build-slides": "yarn mdx-deck build",
-    "upload-slides": "aws s3 sync dist --profile intrepid-webservices",
-    "deploy-slides": "node scripts/deploy-slides.js",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
@@ -37,7 +32,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1",
-    "mdx-deck": "^2.5.0"
+    "gh-pages": "^2.0.1"
   }
 }

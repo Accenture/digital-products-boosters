@@ -10,7 +10,7 @@ const getBoosterMeetingInfo = question =>
 
     rl.question(question, answer => {
       rl.close();
-      const deckPath = `boosters/${answer}/deck.mdx`;
+      const deckPath = `${answer}.mdx`;
       const deckExists = fs.existsSync(deckPath);
 
       if (deckExists) {
