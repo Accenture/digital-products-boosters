@@ -7,20 +7,30 @@ import { Link } from "@reach/router";
 
 ## Beginner React - Meeting 2
 
-<ol>
-  <li>
-    <Link to="/1">Reading 📕</Link>
-  </li>
-  <li>
-    <Link to="/2">Setup 🛠</Link>
-  </li>
-  <li>
-    <Link to="/3">Discussion Questions 🤔</Link>
-  </li>
-  <li>
-    <Link to="/12">Exercises 💪🏼</Link>
-  </li>
-</ol>
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/3">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/12">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
 
 ---
 
@@ -53,6 +63,8 @@ $ yarn test # you should see failing tests
 ---
 
 # Discussion Questions 🤔
+
+_To be discussed during the meeting_
 
 ---
 
@@ -150,7 +162,9 @@ are easier to test, statically type, and reason about.
 
 # Exercises 💪🏼
 
-_N.B. You should be able to build the following components by getting the tests to pass. However, you can also run `yarn start` and go to [your local server](http://localhost:3000) to see what you're building_
+_To be completed during the meeting_
+
+_Pro Tip: You should be able to build the following components by getting the tests to pass. However, you can run `yarn start` and [visit your local server](http://localhost:3000) to see what you're building_
 
 ---
 
