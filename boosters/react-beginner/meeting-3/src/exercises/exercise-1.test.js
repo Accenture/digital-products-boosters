@@ -11,7 +11,7 @@ import { testTimeout, queryPercentProgressBar } from "./exercise-utils";
 // DESIRED FUNCTIONALITY 👇🏽
 // https://digital-products-boosters-react-beginner-meeting-3.s3.amazonaws.com/exercise-1.gif
 
-xdescribe("Exercise 1 - ProgressBars component", () => {
+describe("Exercise 1 - ProgressBars component", () => {
   const renderComponent = () => render(<ProgressBars />);
 
   afterEach(cleanup);
