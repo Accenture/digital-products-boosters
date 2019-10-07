@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "./class-names.module.css";
 
 export const text = {
@@ -11,6 +11,18 @@ export const text = {
 export const webSocketUrl = "ws://localhost:8080";
 
 const MessageListener = ({ setMessages }) => {
+  useEffect(() => {
+    const addMessage = message =>
+      setMessages(previousMessages => [...previousMessages, message]);
+
+    const webSocket = new WebSocket(webSocketUrl);
+    webSocket.onmessage = event => {
+      addMessage(JSON.parse(event.data));
+    };
+
+    return () => webSocket.close();
+  }, [setMessages]);
+
   return null;
 };
 

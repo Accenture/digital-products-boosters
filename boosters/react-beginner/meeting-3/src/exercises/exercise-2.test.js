@@ -11,7 +11,7 @@ import {
 // DESIRED FUNCTIONALITY 👇🏽
 // https://digital-products-boosters-react-beginner-meeting-3.s3.amazonaws.com/exercise-2.gif
 
-xdescribe("Exercise 2 - Messages component", () => {
+describe("Exercise 2 - Messages component", () => {
   const renderComponent = () => render(<Messages />);
   const sendMessage = async (value, { getByLabelText, getByText }) => {
     const messageField = getByLabelText(text.message);
