@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "./class-names.module.css";
+import { fetchRepository } from "./utils";
 
 // You should not have to update this component
 const Repository = ({ description, full_name, html_url, stargazers_count }) => (
@@ -45,7 +46,16 @@ const RepositoryPicker = () => {
     repositoryNames[0]
   );
   const onChange = event => setSelectedRepositoryName(event.target.value);
-  let repository;
+  const [repository, setRepository] = useState();
+
+  useEffect(() => {
+    async function fetchAndSetRepository() {
+      const responseBody = await fetchRepository(selectedRepositoryName);
+      setRepository(responseBody);
+    }
+
+    fetchAndSetRepository();
+  }, [selectedRepositoryName]);
 
   const baseProps = {
     onChange,
