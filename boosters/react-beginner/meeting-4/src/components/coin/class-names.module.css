@@ -1,0 +1,15 @@
+.root {
+  --length: 128px;
+  width: var(--length);
+  margin: 10px;
+}
+
+.image {
+  height: var(--length);
+  width: var(--length);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
