@@ -1,0 +1,269 @@
+import { MinuteTimer } from "../components/minute-timer";
+import Split from "./split";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+import CodeLayout from "./code-layout";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## Beginner React - Meeting 3
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/3">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/12">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [React Docs - Using the Effect Hook](https://reactjs.org/docs/hooks-effect.html)
+2. [React Docs - Rules of Hooks](https://reactjs.org/docs/hooks-rules.html)
+3. [Egghead.io - useEffect Hook](https://egghead.io/lessons/react-store-values-in-localstorage-with-the-react-useeffect-hook?pl=react-hooks-and-suspense-650307f2)
+4. [React Docs - API - useRef](https://reactjs.org/docs/hooks-reference.html#useref)
+5. [Egghead.io - useRef and useEffect Hooks](https://egghead.io/lessons/react-access-and-modify-a-dom-node-with-the-react-useref-and-useeffect-hooks?pl=react-hooks-and-suspense-650307f2)
+6. [Dave Ceddia - How the useEffect Hook Works](https://daveceddia.com/useeffect-hook-examples/)
+
+---
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/react-beginner/meeting-3
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn test # you should see failing tests
+```
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+What is a side effect and what are some examples? Why must side effects be run inside the `useEffect` hook?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+After invoking a function, any observable change besides the functioning
+returning a value is a side effect. Some common examples of side effects are:
+
+1. Making HTTP requests
+2. Opening/closing Websocket connections
+3. Starting/canceling timers
+4. Adding/removing event listeners
+5. Mutating the DOM
+
+If effects are used outside the `useEffect` hook, then effects would be run
+unexpectedly and would most likely not be properly cleaned up. This would
+lead to problems such as memory leaks and invalid application state.
+
+---
+
+<CodeLayout>
+
+## Discussion Question #2
+
+Is this component a good example of using the useEffect hook? Why or why not?
+
+<!-- prettier-ignore -->
+```javascript
+import React, { useEffect, useState } from "react";
+
+const RepositoryWatchers = ({ owner, repository }) => {
+  const [watchersCount, setWatchersCount] = useState(null);
+  const getRepositoryWatchersCount = async () => {
+    const url = "https://api.github.com/repos/" + owner + "/" + repository;
+    const response = await fetch(url);
+    const responseBody = await response.json();
+    setWatchersCount(responseBody.watchers);
+  };
+
+  useEffect(() => {
+    getRepositoryWatchersCount();
+  }, [getRepositoryWatchersCount]);
+
+  return <div>{watchersCount} watchers</div>;
+};
+```
+
+  <MinuteTimer minutes={5} isDiscussion />
+</CodeLayout>
+
+---
+
+# Discussion Question #2 - Answer Pt. 1
+
+The component suffers from making an API call on every single render even if
+the props remain unchanged. This occurs because even though
+`getRepositoryName` is listed in the `useEffect` dependencies, the function
+gets re-created on every render and thus, the effect runs on every render. To
+prevent this from happening, the function should be declared inside the hook
+_and_ the dependencies of the effect should be added (in this case `owner`
+and `repository`). Check out the next slide for a correctly refactored
+component.
+
+P.S. Luckily, you don't have to ever worry about making this mistake if you
+have a linter because it will warn you about this.
+
+---
+
+<CodeLayout>
+
+## Discussion Question #2 - Answer Pt. 2
+
+```javascript
+import React, { useEffect, useState } from "react";
+
+const RepositoryWatchers = ({ owner, repository }) => {
+  const [watchersCount, setWatchersCount] = useState(null);
+
+  useEffect(() => {
+    const getRepositoryWatchersCount = async () => {
+      const url = "https://api.github.com/repos/" + owner + "/" + repository;
+      const response = await fetch(url);
+      const responseBody = await response.json();
+      setWatchersCount(responseBody.watchers);
+    };
+
+    getRepositoryWatchersCount();
+  }, [owner, repository]);
+
+  return <div>{watchersCount} watchers</div>;
+};
+```
+
+</CodeLayout>
+
+---
+
+# Discussion Question #3
+
+What is the purpose of the `useRef` hook?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+The most common and safe usage of the `useRef` hook is to create an object
+whose `.current` property will reference a DOM node corresponding to an HTML
+React element. This is done by passing the object returned by `useRef` as a
+`ref` prop to an HTML React element (i.e. `<div ref={myRef} />`).
+
+The less common and more advanced use case is if you need a mutable value
+that is imperatively changed. Before going down this path, it is recommended
+to first attempt to satisfy your use case with `useState` instead of
+`useRef`. If `useState` suits your needs, then your code will be more
+declarative and less error-prone.
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+_Pro Tip: You should be able to build the following components by getting the tests to pass. However, you can run `yarn start` and [visit your local server](http://localhost:3000) to see what you're building_
+
+---
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+_Pro Tip: You will need to use the `fetchRepository` function in `utils.js` to make the API call. By default it will fake a network request. However, **only after getting the tests to pass**, you can update the `shouldUseRecordedResponse` variable to `false` to perform a real network call to the Github API_
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 0 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/c3808c56ff9664b9cd848b3e9b5ed4b90913ff65)
+
+---
+
+# Exercise 1
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-1.test.js
+```
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+_Pro Tip: You will need to use the `makePercentage` and `drawProgressBar` functions in `utils.js` to draw the progress bar with [D3](https://d3js.org/)._
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/1887d92f9801054094753f16e76ea096a62039ee)
+
+---
+
+<h1 style={{margin: 0}}>Exercise 2</h1>
+
+1. Within the meeting folder, change `xdescribe` to `describe` in `src/exercises/exercise-2.test.js`
+
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+3. **Optional** run a local WebSocket server by opening up a new terminal tab and running `yarn start-server` from the meeting folder.
+
+Also here are some helpful resources on WebSockets:
+
+- [creating a WebSocket client](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications#Examples)
+- [receiving a message](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications#Receiving_messages_from_the_server)
+- [closing the connection](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications#Closing_the_connection)
+
+<MinuteTimer minutes={15} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/0b5c03e8a4dff711431a155cca1b887e1d2d11e7)
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️

@@ -1,0 +1,37 @@
+.root {
+  padding: 10px;
+}
+
+.addButton {
+  background: none;
+  border: 1px solid black;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.progressBars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, var(--svg-length));
+}
+
+.formElements {
+  display: flex;
+  justify-content: center;
+}
+
+.formElements label {
+  margin-right: 5px;
+}
+
+.svg {
+  width: var(--svg-length);
+  height: var(--svg-length);
+}
+
+.backgroundProgressBar {
+  fill: lightgrey;
+}
+
+.progressBar {
+  fill: deepskyblue;
+}
