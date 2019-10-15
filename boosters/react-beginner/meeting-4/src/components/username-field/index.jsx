@@ -16,7 +16,15 @@ const usernameStatuses = {
   UNKNOWN: "UNKNOWN"
 };
 
-const useDebouncedEffect = () => {};
+const useDebouncedEffect = (effectCallback, timeout) => {
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      effectCallback();
+    }, timeout);
+
+    return () => clearTimeout(timeoutId);
+  }, [effectCallback, timeout]);
+};
 
 // YOU SHOULD NOT NEED TO UPDATE THIS COMPONENT
 const UsernameFieldBase = ({

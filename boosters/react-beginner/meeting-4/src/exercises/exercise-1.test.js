@@ -14,7 +14,7 @@ import {
 // DESIRED FUNCTIONALITY 👇🏽
 // https://digital-products-boosters-react-beginner-meeting-4.s3.amazonaws.com/exercise-1.gif
 
-xdescribe("Exercise 1 - UsernameField component", () => {
+describe("Exercise 1 - UsernameField component", () => {
   const renderComponent = () => render(<UsernameField />);
 
   beforeEach(() => {
