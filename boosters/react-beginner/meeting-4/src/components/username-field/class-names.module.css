@@ -1,0 +1,21 @@
+.root {
+  margin: 10px;
+}
+
+.root input {
+  margin-left: 5px;
+}
+
+.root span {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.available {
+  color: green;
+}
+
+.taken {
+  color: orange;
+}

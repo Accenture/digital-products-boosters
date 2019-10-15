@@ -1,0 +1,20 @@
+{
+  "react": {
+    "description": "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
+    "full_name": "facebook/react",
+    "html_url": "https://github.com/facebook/react",
+    "stargazers_count": 137038
+  },
+  "react-native": {
+    "description": "A framework for building native apps with React.",
+    "full_name": "facebook/react-native",
+    "html_url": "https://github.com/facebook/react-native",
+    "stargazers_count": 81442
+  },
+  "create-react-app": {
+    "description": "Set up a modern web app by running one command.",
+    "full_name": "facebook/create-react-app",
+    "html_url": "https://github.com/facebook/create-react-app",
+    "stargazers_count": 72140
+  }
+}
