@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import srcHeads from "./heads.png";
 import srcTails from "./tails.jpg";
 import classNames from "./class-names.module.css";
 
-const useBooleanState = () => {
-  return [false, () => {}, () => {}, () => {}];
+const useBooleanState = (isInitiallyTrue = true) => {
+  const [booleanState, setBooleanState] = useState(isInitiallyTrue);
+  const toggleBoolean = () => setBooleanState(previousState => !previousState);
+  const setToTrue = () => setBooleanState(true);
+  const setToFalse = () => setBooleanState(false);
+
+  return [booleanState, toggleBoolean, setToTrue, setToFalse];
 };
 
 export const text = {
