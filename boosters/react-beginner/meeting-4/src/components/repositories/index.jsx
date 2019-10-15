@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Link, BrowserRouter, Route, useParams } from "react-router-dom";
 import classNames from "./class-names.module.css";
+import { fetchRepository } from "./utils";
 
 export const repositoryNames = ["react", "react-native", "create-react-app"];
 
@@ -33,30 +35,50 @@ const RepositoryLink = ({ repositoryName }) => {
 
   return (
     <li>
-      <a href={href}>{repositoryName}</a>
+      <Link to={href}>{repositoryName}</Link>
     </li>
   );
 };
 
 const Repository = () => {
-  let repository;
+  const { repositoryName } = useParams();
+  const [repository, setRepository] = useState(null);
+
+  useEffect(() => {
+    async function fetchAndSetRepository() {
+      const responseBody = await fetchRepository(repositoryName);
+      setRepository(responseBody);
+    }
+
+    fetchAndSetRepository();
+    return () => setRepository(null);
+  }, [repositoryName]);
 
   return repository ? <RepositoryBase {...repository} /> : <Loading />;
 };
 
 const Repositories = () => (
-  <div className={classNames.repositoryPicker}>
-    <h1>
-      <a href="/">{text.repositories}</a>
-    </h1>
-    <ul>
-      {repositoryNames.map(repositoryName => (
-        <RepositoryLink key={repositoryName} repositoryName={repositoryName} />
-      ))}
-    </ul>
-    <Repository />
-    <h2>{text.pick}</h2>
-  </div>
+  <BrowserRouter>
+    <div className={classNames.repositoryPicker}>
+      <h1>
+        <Link to="/">{text.repositories}</Link>
+      </h1>
+      <ul>
+        {repositoryNames.map(repositoryName => (
+          <RepositoryLink
+            key={repositoryName}
+            repositoryName={repositoryName}
+          />
+        ))}
+      </ul>
+      <Route path="/repositories/:repositoryName">
+        <Repository />
+      </Route>
+      <Route exact path="/">
+        <h2>{text.pick}</h2>
+      </Route>
+    </div>
+  </BrowserRouter>
 );
 
 export default Repositories;

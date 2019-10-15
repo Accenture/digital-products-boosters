@@ -19,7 +19,7 @@ import data from "../server/data.json";
 // DESIRED FUNCTIONALITY 👇🏽
 // https://digital-products-boosters-react-beginner-meeting-4.s3.amazonaws.com/exercise-2.gif
 
-xdescribe("Exercise 2 - Repositories component", () => {
+describe("Exercise 2 - Repositories component", () => {
   const [reactRepositoryName, reactNativeRepositoryName] = repositoryNames;
   const [reactRepository, reactNativeRepository] = repositoryNames.map(
     repositoryName => data[repositoryName]
