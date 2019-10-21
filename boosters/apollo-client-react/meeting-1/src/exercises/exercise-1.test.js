@@ -7,7 +7,7 @@ import { repositoriesMocks, timeout } from "./exercise-utils";
 // DESIRED FUNCTIONALITY 👇🏽
 // https://digital-products-boosters-apollo-client-react-meeting-1.s3.amazonaws.com/exercise-1.gif
 
-xdescribe("Exercise 1 - Repositories", () => {
+describe("Exercise 1 - Repositories", () => {
   const renderComponent = () =>
     render(
       <MockedProvider mocks={repositoriesMocks}>
