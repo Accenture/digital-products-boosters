@@ -10,11 +10,22 @@ const text = {
 const makeBoosterMeetingUrl = boosterMeeting =>
   `http://digital-products-boosters-${boosterMeeting}.s3-website-us-east-1.amazonaws.com`;
 
-const boosterData = [{ name: "React - Beginner", meetings: [1, 2, 3, 4] }];
+const boosterData = [
+  {
+    name: "React - Beginner",
+    kebabCaseName: "react-beginner",
+    meetings: [1, 2, 3, 4]
+  },
+  {
+    name: "Apollo Client - React",
+    kebabCaseName: "apollo-client-react",
+    meetings: [1]
+  }
+];
 const boosters = boosterData.map(booster => {
   const meetings = booster.meetings.map(number => ({
     number,
-    url: makeBoosterMeetingUrl(`react-beginner-meeting-${number}`),
+    url: makeBoosterMeetingUrl(`${booster.kebabCaseName}-meeting-${number}`),
     name: `Meeting ${number}`
   }));
 
