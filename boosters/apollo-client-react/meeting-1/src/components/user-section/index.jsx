@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import React, { useState } from "react";
 import Repository from "../repository";
@@ -39,13 +40,19 @@ const UserSectionBase = ({ children, onChange, onSubmit, value }) => (
 
 const UserSection = () => {
   const [value, setValue] = useState("");
+  const [selectedLogin, setSelectedLogin] = useState("");
   const onChange = event => setValue(event.target.value);
   const onSubmit = event => {
     event.preventDefault();
+    setSelectedLogin(value);
   };
+  const { data, error, loading } = useQuery(QUERY_GET_USER_REPOSITORIES, {
+    skip: !selectedLogin,
+    variables: { login: selectedLogin }
+  });
 
   const baseProps = {
-    children: <UserRepositories />,
+    children: <UserRepositories data={data} error={error} loading={loading} />,
     onChange,
     onSubmit,
     value

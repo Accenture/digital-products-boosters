@@ -1,4 +1,6 @@
 import React from "react";
+import Error from "../error";
+import Loading from "../loading";
 import Repository from "../repository";
 import classNames from "./class-names.module.css";
 
@@ -16,9 +18,14 @@ const UserRepositoriesBase = ({ repositories, textHeader }) => (
   </>
 );
 
-const UserRepositories = () => {
-  const repositories = [];
-  const textHeader = text.theirRepositories;
+const UserRepositories = ({ data, error, loading }) => {
+  if (loading) return <Loading />;
+  if (error) return <Error error={error} />;
+  if (!data) return null;
+
+  const { user } = data;
+  const repositories = user.repositories.nodes;
+  const textHeader = user.login + text.theirRepositories;
 
   const baseProps = { repositories, textHeader };
   return <UserRepositoriesBase {...baseProps} />;
