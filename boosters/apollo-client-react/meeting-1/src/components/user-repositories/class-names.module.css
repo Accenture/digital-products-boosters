@@ -1,0 +1,4 @@
+.repositoriesSection {
+  display: inline-flex;
+  flex-direction: column;
+}

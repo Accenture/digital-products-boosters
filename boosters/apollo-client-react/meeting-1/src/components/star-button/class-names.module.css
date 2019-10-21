@@ -1,0 +1,27 @@
+.button {
+  --length: 20px;
+  background: none;
+  border: 0;
+  height: var(--length);
+  margin-left: 5px;
+  padding: 0;
+  width: var(--length);
+}
+
+.svgStarred,
+.svgNotStarred {
+  fill-rule: nonzero;
+  fill: var(--color);
+  height: 100%;
+  stroke-width: 5px;
+  stroke: var(--color);
+  width: 100%;
+}
+
+.svgStarred {
+  --color: gold;
+}
+
+.svgNotStarred {
+  --color: grey;
+}

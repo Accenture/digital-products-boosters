@@ -1,0 +1,14 @@
+.form {
+  display: flex;
+  margin-top: 10px;
+}
+
+.form input {
+  margin-left: 5px;
+}
+
+.form button {
+  background: none;
+  border: 1p solid black;
+  margin-left: 5px;
+}

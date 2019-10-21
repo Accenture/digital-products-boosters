@@ -1,0 +1,259 @@
+import { MinuteTimer } from "../components/minute-timer";
+import Split from "./split";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+import CodeLayout from "./code-layout";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## Apollo Client React - Meeting 1
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/4">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/12">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [Apollo Docs - Introduction](https://www.apollographql.com/docs/react/why-apollo/)
+2. [Apollo Docs - Get Started](https://www.apollographql.com/docs/react/get-started/)
+3. [Apollo Docs - useQuery](https://www.apollographql.com/docs/react/data/queries/)
+4. [Apollo Docs - useMutation](https://www.apollographql.com/docs/react/data/mutations/)
+
+---
+
+## Setup - Pt. 1 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/apollo-client-react/meeting-1
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn test # you should see failing tests
+```
+
+---
+
+## Setup - Pt. 2 🛠
+
+1. [Create a Github personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line#creating-a-token) if you have not done so.
+
+2. In the meeting folder, set `REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN` to your personal access token in the `.env.local` file.
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+What are the advantages of using Apollo Client over just making the API
+calls directly to the GraphQL endpoint with the Fetch API?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer Pt. 1
+
+The biggest advantage of Apollo client is that it features a cache that
+normalizes all the graph data from your GraphQL endpoint. This greatly
+decreases the amount of state management boilerplate code that you have to
+write. If you have worked on a Redux application, then you have probably seen
+that the state management boilerplate code comprises a significant amount of
+the application (i.e. code for reducers, actions, selectors, normalizers, API
+calls). By switching to Apollo client, the majority of this code could be
+deleted.
+
+---
+
+# Discussion Question #1 - Answer Pt. 2
+
+Additionally, Apollo Client has the following advantages:
+
+- Automatically tracks loading and errors states
+- Features a declarative React Hooks API
+- Can unify local and remote data
+- Can be customized for more advanced use cases
+
+---
+
+# Discussion Question #2
+
+The following mutation is executed by Apollo Client and the server request is
+successful. However, the todo's type is not updated in the front end.
+If you refresh the page, then the todo's type will have the new value. Why is
+this occuring?
+
+```graphql
+mutation UpdateTodo($id: String!, $type: String!) {
+  updateTodo(id: $id, type: $type) {
+    type
+  }
+}
+```
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+<CodeLayout>
+
+# Discussion Question #2 - Answer
+
+Apollo client uses both the type and `id` of objects in the response to
+normalize its cache. This bug is fixed simply by adding an `id` field to the
+mutation even if the `id` is not explicitly used in the application code.
+Once this is added, Apollo client will use this `id` to find the todo in its
+cache and update its `type` value.
+
+```graphql
+mutation UpdateTodo($id: String!, $type: String!) {
+  updateTodo(id: $id, type: $type) {
+    id
+    type
+  }
+}
+```
+
+FYI: This _could_ also be fixed by manually updating the cache after the
+mutation is executed, but that approach adds unnecessary code and complexity.
+
+</CodeLayout>
+
+---
+
+# Discussion Question #3
+
+What does the `skip` option of `useQuery` do?
+
+<MinuteTimer minutes={3} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+The `skip` options skips the execution of the query if the value is truthy.
+This option would be useful if one of the non-null variables in the query
+were to be `null` or `undefined` . In this case, you could refrain from
+performing the query by using the `skip` option.
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+_Pro Tip: You should be able to build the following components by getting the tests to pass. However, you can run `yarn start` and [visit your local server](http://localhost:3000) to see what you're building_
+
+---
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating `Greeting` component.
+
+_Pro Tip: There are `Error` and `Loading` components available for you to use_
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 0 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/)
+
+---
+
+# Exercise 1
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-1.test.js
+```
+
+2. Get the failing tests to pass, by updating the `Repositories` component.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/)
+
+---
+
+# Exercise 2
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-2.test.js
+```
+
+2. Get the failing tests to pass, by updating the `StarButton` component.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/)
+
+---
+
+# Exercise 3
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-3.test.js
+```
+
+2. Get the failing tests to pass, by updating the `UserSection` and `UserRepositories` component.is
+
+<MinuteTimer minutes={15} />
+
+---
+
+# Exercise 3 - Answer
+
+[Click to see answer](https://github.com/Accenture/digital-products-boosters/commit/)
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️
