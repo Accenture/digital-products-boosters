@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import React from "react";
 import classNames from "./class-names.module.css";
@@ -49,7 +50,13 @@ const StarButton = ({ id, name, viewerHasStarred }) => {
     ? classNames.svgStarred
     : classNames.svgNotStarred;
 
-  const onClick = undefined;
+  const [addStar] = useMutation(MUTATION_ADD_STAR_TO_REPOSITORY, {
+    variables: { id }
+  });
+  const [removeStar] = useMutation(MUTATION_REMOVE_STAR_FROM_REPOSITORY, {
+    variables: { id }
+  });
+  const onClick = viewerHasStarred ? removeStar : addStar;
 
   const baseProps = { classNameSvg, label, onClick };
   return <StarBase {...baseProps} />;
