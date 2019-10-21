@@ -37,14 +37,14 @@ import CodeLayout from "./code-layout";
 
 ## Reading 📕
 
-1. [Apollo Docs - Introduction](https://www.apollographql.com/docs/react/why-apollo/)
+1. [Apollo Docs - Why Apollo Client?](https://www.apollographql.com/docs/react/why-apollo/)
 2. [Apollo Docs - Get Started](https://www.apollographql.com/docs/react/get-started/)
 3. [Apollo Docs - useQuery](https://www.apollographql.com/docs/react/data/queries/)
 4. [Apollo Docs - useMutation](https://www.apollographql.com/docs/react/data/mutations/)
 
 ---
 
-## Setup - Pt. 1 🛠
+## Setup - Part 1 of 2 🛠
 
 1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
 
@@ -58,13 +58,21 @@ $ yarn install
 $ yarn test # you should see failing tests
 ```
 
+_Continue to the next slide to finish the setup 👉_
+
 ---
 
-## Setup - Pt. 2 🛠
+## Setup - Part 2 of 2 🛠
 
 1. [Create a Github personal access token](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line#creating-a-token) if you have not done so.
 
-2. In the meeting folder, set `REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN` to your personal access token in the `.env.local` file.
+2. In the meeting folder, create an environment variable file by running
+
+   ```
+   cp .sample.env.local .env.local
+   ```
+
+3. Set `REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN` to your personal access token in the `.env.local` file.
 
 ---
 
@@ -107,17 +115,18 @@ Additionally, Apollo Client has the following advantages:
 
 ---
 
-# Discussion Question #2
+<h1 style={{margin: 0}}>Discussion Question #2</h1>
 
 The following mutation is executed by Apollo Client and the server request is
-successful. However, the todo's type is not updated in the front end.
-If you refresh the page, then the todo's type will have the new value. Why is
-this occuring?
+successful. However, the todo's `completed` isn't updated in the front end.
+If you refresh the page, then the todo's `completed` will have the new value.
+Assuming that the mutation returns a `Todo` type object, why is this
+occuring?
 
 ```graphql
-mutation UpdateTodo($id: String!, $type: String!) {
-  updateTodo(id: $id, type: $type) {
-    type
+mutation UpdateTodo($id: String!, $completed: Boolean!) {
+  updateTodo(id: $id, completed: $completed) {
+    completed
   }
 }
 ```
@@ -134,13 +143,13 @@ Apollo client uses both the type and `id` of objects in the response to
 normalize its cache. This bug is fixed simply by adding an `id` field to the
 mutation even if the `id` is not explicitly used in the application code.
 Once this is added, Apollo client will use this `id` to find the todo in its
-cache and update its `type` value.
+cache and update its `completed` value.
 
 ```graphql
-mutation UpdateTodo($id: String!, $type: String!) {
-  updateTodo(id: $id, type: $type) {
+mutation UpdateTodo($id: String!, $completed: Boolean!) {
+  updateTodo(id: $id, completed: $completed) {
+    completed
     id
-    type
   }
 }
 ```
@@ -179,7 +188,7 @@ _Pro Tip: You should be able to build the following components by getting the te
 
 # Exercise 0
 
-1. Complete the [Setup](/2) if you haven't done so already.
+1. Complete the [Setup](/2) if you haven't done so already. **If you get an error regarding environment variables**, please make sure you've done both parts of the Setup.
 2. Get the failing tests to pass, by updating `Greeting` component.
 
 _Pro Tip: There are `Error` and `Loading` components available for you to use_
