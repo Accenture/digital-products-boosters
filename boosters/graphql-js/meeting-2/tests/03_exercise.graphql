@@ -1,0 +1,10 @@
+query exercise_3 {
+  users {
+    bio
+    firstName
+    id
+    lastName
+    pictureUrl
+    username
+  }
+}
