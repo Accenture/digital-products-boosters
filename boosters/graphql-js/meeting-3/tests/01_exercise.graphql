@@ -1,0 +1,6 @@
+query exercise_1 {
+  currentUser {
+    id
+    firstName
+  }
+}
