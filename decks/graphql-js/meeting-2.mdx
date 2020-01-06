@@ -1,0 +1,303 @@
+import { MinuteTimer } from "../components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+import CodeLayout from "./code-layout";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## GraphQL (JS) - Meeting 2
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/3">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/10">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [GraphQL - Schemas and Types](https://graphql.org/learn/schema/)
+2. [GraphQL - Validation](https://graphql.org/learn/validation/)
+3. [GraphQL - Execution](https://graphql.org/learn/execution/)
+4. [GraphQL - Introspection](https://graphql.org/learn/introspection/)
+5. [Apollo GraphQL - Designing GraphQL Mutations](https://blog.apollographql.com/designing-graphql-mutations-e09de826ed97)
+6. [Apollo GraphQL - Getting Started](https://www.apollographql.com/docs/apollo-server/getting-started/)
+
+---
+
+<CodeLayout>
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/graphql-js/meeting-2
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn db:create
+$ yarn db:migrate
+$ yarn setup:test
+$ yarn test # you should see failing tests
+```
+
+</CodeLayout>
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+When should you use interfaces and unions? How do you choose between using an interface and union?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+Interfaces and unions come in handy whenever two different types are in a returned list. For example, the search results for a movie app may return search results that are either actors or movies. In this case one might use a Searchable interface or use a union. In general, interfaces should be used when the types in the list share common fields. Otherwise, use a union. FYI you’ll end up using interfaces most of the time.
+
+---
+
+# Discussion Question #2
+
+How does GraphQL Playground work? How is it able to show us the schema which is defined on the server? How does it know that the query that we typed in is valid? How can it autosuggest fields when we type?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #2 - Answer
+
+GraphQL Playground’s functionality is enabled by GraphQL’s introspection feature, which allows the GraphQL endpoint to return its schema via a special query. Essentially, GraphQL Playground does a request to the endpoint to get information about the schema. Once the playground has the schema, it can display the schema, suggest autocompletions, and validate queries without having the user actually run a query.
+
+---
+
+# Discussion Question #3
+
+Is it better to have a general mutation for a resource (i.e. updateUser) or multiple specific mutations (i.e. updateUserPassword, updateUserStatus, etc.)?
+
+---
+
+# Discussion Question #3 - Answer
+
+It is better to have multiple specific mutations that map to specific UI actions. This is because doing so gives us more flexibility in the long run. It’s easier to optimize a single specialized mutation rather than optimize a mutation that is used in multiple places with different arguments. Likewise, it’s also easier to deprecate and create a new version of a mutation. Another advantage is that it decreases the attack vector for hackers.
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+You’ll be building your own GraphQL schema through TDD in the following exercises! FYI the solutions presented here are simplified to aid in the understanding of the fundamentals. We will refactor these solutions in upcoming meetings to what they would look like in real client projects.
+
+---
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating the `config/schema.graphql` and `resolvers` files as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 0 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 1
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/01_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 2
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/02_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 3
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/03_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 3 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 4
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/04_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 4 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 5
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/05_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 5 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 6
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/06_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 6 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 7
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/07_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 7 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 8
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/08_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 8 - Answer
+
+[Click to see answer]()
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️
