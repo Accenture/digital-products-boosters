@@ -20,6 +20,11 @@ const boosterData = [
     name: "Apollo Client - React",
     kebabCaseName: "apollo-client-react",
     meetings: [1]
+  },
+  {
+    name: "GraphQL - JS",
+    kebabCaseName: "graphql-js",
+    meetings: [1, 2, 3, 4]
   }
 ];
 const boosters = boosterData.map(booster => {
