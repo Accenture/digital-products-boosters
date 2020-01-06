@@ -1,0 +1,204 @@
+import { MinuteTimer } from "../components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+import CodeLayout from "./code-layout";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## GraphQL (JS) - Meeting 3
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/3">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/10">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [GraphQL - Best Practices](https://graphql.org/learn/best-practices/)
+2. [GraphQL - Thinking in Graphs](https://graphql.org/learn/thinking-in-graphs/)
+3. [GraphQL - Authorization](https://graphql.org/learn/authorization/)
+4. [YouTube/Dan Schafer - GraphQL at Facebook](https://youtu.be/etax3aEe2dA)
+5. [YouTube/Apollo GraphQL - Lessons from 4 Years of GraphQL](https://youtu.be/zVNrqo9XGOs)
+
+---
+
+<CodeLayout>
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/graphql-js/meeting-3
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn db:create
+$ yarn db:migrate
+$ yarn setup:test
+$ yarn test # you should see failing tests
+```
+
+</CodeLayout>
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+Imagine you are creating a music app where you can play songs that you have bought in other music apps. Product wants to build an album details page that is called the “Songs” page. However, the third-party API with which you’re integrating calls these items “Tracks”. What should the GraphQL type name be for this object? Song or Track?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+It should be named Song. You should think what a new front end engineer (i.e. iOS, Android, or web who doesn’t do back end), would search for and name the new type and/or field as close to that as possible. The name doesn’t have to be exact because sometimes you may want to add a prefix or suffix in order to have flexibility in the future (i.e. a type was named SongReview instead of just Review because of the possibility of multiple review types in the future).
+
+---
+
+# Discussion Question #2
+
+It is a best practice for GraphQL to be a thin interface. What does this mean?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #2 - Answer
+
+It simply means that GraphQL is probably not the right place where business domain rules (authorization, data validation, etc.) and certain back end implementation details (caching, unique id generation, etc.) should be defined. Instead these rules and implementation details should be defined in the layers underneath such as your business logic layer (models/service functions).
+
+---
+
+# Discussion Question #3
+
+Data loader is the recommended JavaScript library to avoid N + 1 database queries in GraphQL. How does a loader know that it’s done loading objects and is ready to make a single batched request? (Feel free to google “github dataloader”)
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+JavasScript is synchronous and single-thread, but it’s event loop enables it to run additional code after the initial code execution (i.e. setTimeout callback executes after time has passed). Data loader uses Node’s process.nextTick to do a single request to your database after the first event loop iteration where all the loading was done.
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+You’ll continue to develop your own GraphQL schema using the best practices from the readings in the following exercises!
+
+---
+
+# Exercise 1
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 2
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/02_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 3
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/03_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 3 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 4
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+tests/04_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 4 - Answer
+
+[Click to see answer]()
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️
