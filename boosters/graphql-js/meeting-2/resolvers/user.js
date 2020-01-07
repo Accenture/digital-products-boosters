@@ -8,4 +8,6 @@ exports.lastName = object => object.lastName;
 
 exports.pictureUrl = object => object.pictureUrl;
 
+exports.repositories = object => object.getRepositories();
+
 exports.username = object => object.username;

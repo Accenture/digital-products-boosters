@@ -19,7 +19,7 @@ describe('exercise 07', () => {
   beforeEach(async () => (values = await setup('07')));
   afterEach(teardown);
 
-  xit('should return the expected response', async () => {
+  it('should return the expected response', async () => {
     const { db, EXERCISE_QUERY, testClient } = values;
     const user = await db.user.create(userData);
     repositoryData.userId = user.id;
