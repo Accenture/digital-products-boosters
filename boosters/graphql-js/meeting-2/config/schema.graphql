@@ -4,8 +4,14 @@ type Query {
   myIntegerField: Int!
   myTextField: String!
   testField: String!
+  repository(id: ID!): Repository
   user(id: ID!): User
   users: [User!]!
+}
+
+type Repository {
+  id: ID!
+  name: String!
 }
 
 type User {

@@ -1,7 +1,7 @@
 const resolvers = {
   // Mutation: require('./mutation'),
   Query: require('./query'),
-  // Repository: require('./repository'),
+  Repository: require('./repository'),
   User: require('./user'),
 };
 
