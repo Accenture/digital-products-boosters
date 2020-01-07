@@ -4,4 +4,9 @@ type Query {
   myIntegerField: Int!
   myTextField: String!
   testField: String!
+  users: [User!]!
+}
+
+type User {
+  id: ID!
 }

@@ -30,7 +30,7 @@ describe('exercise 02', () => {
   beforeEach(async () => (values = await setup('02')));
   afterEach(teardown);
 
-  xit('should return the expected response', async () => {
+  it('should return the expected response', async () => {
     const { db, EXERCISE_QUERY, testClient } = values;
     await db.user.bulkCreate(userData);
     const users = await db.user.findAll();
