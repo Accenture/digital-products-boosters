@@ -1,3 +1,4 @@
 type Query {
+  myTextField: String!
   testField: String!
 }
