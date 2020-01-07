@@ -24,10 +24,10 @@ import CodeLayout from "./code-layout";
     <div style={{ "text-align": "left" }}>Meeting Agenda</div>
     <ol>
       <li>
-        <Link to="/3">Discussion Questions 🤔</Link>
+        <Link to="/4">Discussion Questions 🤔</Link>
       </li>
       <li>
-        <Link to="/10">Exercises 💪🏼</Link>
+        <Link to="/11">Exercises 💪🏼</Link>
       </li>
     </ol>
   </div>
@@ -51,10 +51,32 @@ import CodeLayout from "./code-layout";
 
 1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
 
-2. From the root of the `digital-products-boosters` repository, run:
+2. Setup a local Postgres database. You can either:
+  
+  a. Install using the `brew install postgres`
+
+  b. Install Docker Desktop (`brew cask install docker`), then run:
 
 ```bash
-$ cd boosters/graphql-js/meeting-3
+docker run -d --rm -p 5432:5432 postgres
+# Explanation of arguments
+# -d Runs as a daemon (in the background)
+# --rm Removes the docker container once it stops
+# -p 5432:5432 Binds port 5432 in the container to the same port on the host
+```
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+## Setup 🛠 - cont.
+
+3. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/graphql-js/meeting-2
 $ git pull
 $ asdf install
 $ yarn install
