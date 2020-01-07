@@ -24,7 +24,7 @@ const boosterData = [
   {
     name: "GraphQL - JS",
     kebabCaseName: "graphql-js",
-    meetings: [1, 2, 3, 4]
+    meetings: [1, 2, 3, 4, 5]
   }
 ];
 const boosters = boosterData.map(booster => {
