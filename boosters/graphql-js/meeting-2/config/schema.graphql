@@ -8,5 +8,10 @@ type Query {
 }
 
 type User {
+  bio: String
+  firstName: String!
   id: ID!
+  lastName: String!
+  pictureUrl: String
+  username: String!
 }
