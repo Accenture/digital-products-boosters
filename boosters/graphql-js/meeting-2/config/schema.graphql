@@ -1,4 +1,7 @@
 type Query {
+  myArrayField: [String!]!
+  myBooleanField: Boolean!
+  myIntegerField: Int!
   myTextField: String!
   testField: String!
 }
