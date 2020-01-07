@@ -2,11 +2,13 @@
   "development": {
     "database": "graphql_bookclub_js_development",
     "host": "127.0.0.1",
+    "username": "postgres",
     "dialect": "postgres"
   },
   "test": {
     "database": "graphql_bookclub_js_test",
     "host": "127.0.0.1",
+    "username": "postgres",
     "dialect": "postgres",
     "logging": false,
     "operatorsAliases": false
