@@ -7,3 +7,5 @@ exports.user = (object, args, context) =>
   db.user.findOne({ where: { id: args.id } });
 
 exports.users = (object, args, context) => db.user.findAll();
+
+exports.currentUser = (object, args, context) => context.currentUser;

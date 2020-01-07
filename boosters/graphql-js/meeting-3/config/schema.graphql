@@ -11,6 +11,7 @@ type CreateUserPayload {
 }
 
 type Query {
+  currentUser: User!
   repository(id: ID!): Repository
   user(id: ID!): User
   users: [User!]!
