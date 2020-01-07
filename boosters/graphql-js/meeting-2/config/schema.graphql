@@ -11,6 +11,7 @@ type Query {
 type User {
   bio: String
   firstName: String!
+  fullName: String!
   id: ID!
   lastName: String!
   pictureUrl: String
