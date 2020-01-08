@@ -32,7 +32,7 @@ describe('exercise 02 - gen method on Repository class', () => {
   beforeEach(async () => (values = await setup()));
   afterAll(teardown);
 
-  xit('should return repository if id is for public repository', async () => {
+  it('should return repository if id is for public repository', async () => {
     const { db } = values;
     await db.repository.create(randomRepositoryData);
     const currentUser = await db.user.create(currentUserData);
@@ -47,7 +47,7 @@ describe('exercise 02 - gen method on Repository class', () => {
     expect(result.userId).toEqual(repository.userId);
   });
 
-  xit('should return repository if id is for private repository owned by user', async () => {
+  it('should return repository if id is for private repository owned by user', async () => {
     const { db } = values;
     await db.repository.create(randomRepositoryData);
     const currentUser = await db.user.create(currentUserData);
@@ -62,7 +62,7 @@ describe('exercise 02 - gen method on Repository class', () => {
     expect(result.userId).toEqual(repository.userId);
   });
 
-  xit('should return null if id is for private repository not owned by user', async () => {
+  it('should return null if id is for private repository not owned by user', async () => {
     const { db } = values;
     await db.repository.create(randomRepositoryData);
     const currentUser = await db.user.create(currentUserData);
