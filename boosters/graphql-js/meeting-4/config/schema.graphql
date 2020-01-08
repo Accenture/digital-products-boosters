@@ -27,6 +27,15 @@ type Repository {
   id: ID!
   name: String!
   user: User!
+  collaboratorsConnection: RepositoryCollaboratorsConnection!
+}
+
+type RepositoryCollaboratorsConnection {
+  edges: [RepositoryCollaboratorsEdge!]!
+}
+
+type RepositoryCollaboratorsEdge {
+  joinedAt: Date!
 }
 
 type User {
