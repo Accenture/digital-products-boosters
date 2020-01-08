@@ -36,7 +36,7 @@ const collaboratorsData = [
   },
 ];
 
-xdescribe('exercise 03', () => {
+describe('exercise 03', () => {
   let values;
   beforeEach(async () => (values = await setup('03')));
   afterAll(teardown);

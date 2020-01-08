@@ -28,6 +28,8 @@ type Repository {
   name: String!
   user: User!
   collaboratorsConnection(
+    after: String
+    first: Int
     orderBy: CollaboratorOrder
   ): RepositoryCollaboratorsConnection!
 }
