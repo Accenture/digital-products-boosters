@@ -36,6 +36,7 @@ type RepositoryCollaboratorsConnection {
 
 type RepositoryCollaboratorsEdge {
   joinedAt: Date!
+  node: User!
 }
 
 type User {
