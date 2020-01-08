@@ -27,7 +27,23 @@ type Repository {
   id: ID!
   name: String!
   user: User!
-  collaboratorsConnection: RepositoryCollaboratorsConnection!
+  collaboratorsConnection(
+    orderBy: CollaboratorOrder
+  ): RepositoryCollaboratorsConnection!
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+enum CollaboratorOrderField {
+  COLLABORATOR_JOINED_AT
+}
+
+input CollaboratorOrder {
+  direction: OrderDirection!
+  field: CollaboratorOrderField!
 }
 
 type RepositoryCollaboratorsConnection {
@@ -35,6 +51,7 @@ type RepositoryCollaboratorsConnection {
 }
 
 type RepositoryCollaboratorsEdge {
+  cursor: String!
   joinedAt: Date!
   node: User!
 }

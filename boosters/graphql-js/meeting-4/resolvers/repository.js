@@ -7,7 +7,12 @@ exports.name = object => object.name;
 
 exports.user = object => object.getUser();
 
-exports.collaboratorsConnection = async object => {
-  const collaborations = await object.getCollaborations();
+exports.collaboratorsConnection = async (object, args) => {
+  const direction = args.orderBy ? args.orderBy.direction : 'ASC';
+
+  const collaborations = await object.getCollaborations({
+    order: [['createdAt', direction]],
+  });
+
   return { edges: collaborations };
 };
