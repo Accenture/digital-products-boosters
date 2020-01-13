@@ -1,9 +1,11 @@
 const request = require('supertest');
 const app = require('../src/app');
-const setup = require('./config/setup')('user');
+const createDB = require('./config/setup').createDB;
+const setup = require('./config/setup').seedDB('user');
 
 describe('Get All Users', () => {
-  beforeAll(() => {
+  beforeAll(async () => {
+    await createDB();
     return setup([
       { firstName: 'Andrew', lastName: 'Mayer' },
       { firstName: 'Andrew', lastName: 'Mayer' },

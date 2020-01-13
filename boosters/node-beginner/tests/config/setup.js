@@ -1,11 +1,12 @@
 const db = require('../../src/models').db;
 
-module.exports = database => async data => {
+exports.createDB = async () => {
   try {
-    await db.sync({ force: true });
-    if (data) await db.models[database].bulkCreate(data);
+    return await db.sync({ force: true });
   } catch (err) {
     console.error(err);
     return { err };
   }
 };
+
+exports.seedDB = database => async data => db.models[database].bulkCreate(data);
