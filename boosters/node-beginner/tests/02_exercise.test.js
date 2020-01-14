@@ -1,23 +1,38 @@
 const request = require('supertest');
 const app = require('../src/app');
-const createDB = require('./config/setup').createDB;
-const userSetup = require('./config/setup').seedDB('user');
-const repoSetup = require('./config/setup').seedDB('repo');
+const userSetup = require('./config/setup')('Users');
+const repoSetup = require('./config/setup')('Repos');
+const teardown = require('./config/teardown');
+const uuid = require('uuid/v4');
+
+const users = [
+  { firstName: 'Andrew', lastName: 'Mayer', id: uuid() },
+  { firstName: 'Andrew', lastName: 'Mayer', id: uuid() },
+];
+
+const repos = users.reduce(
+  (acc, curr) => [
+    ...acc,
+    { name: 'repo1', userId: curr.id, isPrivate: false, id: uuid() },
+    { name: 'repo2', userId: curr.id, isPrivate: true, id: uuid() },
+  ],
+  [],
+);
 
 describe('test', () => {
   beforeAll(async () => {
-    await createDB();
-    const test = await userSetup([
-      { firstName: 'Andrew', lastName: 'Mayer' },
-      { firstName: 'Andrew', lastName: 'Mayer' },
-    ]);
-    return Promise.all([
-      repoSetup([{ name: 'adf', userId: 1, isPrivate: false }]),
-      repoSetup([{ name: 'adf', userId: 2, isPrivate: false }]),
-    ]);
+    await userSetup(users)();
+    return repoSetup(repos)();
   });
+  afterAll(teardown);
   it('should return all repos of a given userId', async () => {
-    res = await request(app).get('/users/1/repos');
-    expect(res.statusCode).toEqual(200);
+    res = await Promise.all(
+      users.map(user => request(app).get(`/users/${user.id}/repos`)),
+    );
+
+    res.map(res => {
+      expect(res.statusCode).toEqual(200);
+      expect(res.body.length).toEqual(2);
+    });
   });
 });

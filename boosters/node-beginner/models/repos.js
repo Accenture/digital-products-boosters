@@ -1,17 +1,17 @@
-"use strict";
-const uuid = require("uuid/v4");
+'use strict';
+const uuid = require('uuid/v4');
 
 module.exports = (sequelize, DataTypes) => {
   const Repos = sequelize.define(
-    "Repos",
+    'Repos',
     {
       name: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
-      isPrivate: DataTypes.BOOLEAN
+      isPrivate: DataTypes.BOOLEAN,
     },
-    {}
+    {},
   );
   Repos.associate = function(models) {
     Repos.belongsTo(models.Users);

@@ -1,28 +1,27 @@
 const request = require('supertest');
 const app = require('../src/app');
-const createDB = require('./config/setup').createDB;
-const setup = require('./config/setup').seedDB('user');
+const setup = require('./config/setup')('Users');
+const teardown = require('./config/teardown');
+const uuid = require('uuid/v4');
+
+const users = [
+  { firstName: 'Andrew', lastName: 'Mayer', id: uuid() },
+  { firstName: 'Andrew', lastName: 'Mayer', id: uuid() },
+];
 
 describe('test', () => {
-  beforeAll(async () => {
-    await createDB();
-    return setup([
-      { firstName: 'Andrew', lastName: 'Mayer' },
-      { firstName: 'Andrew', lastName: 'Mayer' },
-    ]);
-  });
+  beforeAll(setup(users));
+  afterAll(teardown);
+
   it('should return user profile given speicifc userId', async () => {
-    [res1, res2] = await Promise.all([
-      request(app).get('/users/1'),
-      request(app).get('/users/2'),
-    ]);
+    res = await Promise.all(
+      users.map(user => request(app).get(`/users/${user.id}`)),
+    );
 
-    expect(res1.statusCode).toEqual(200);
-    expect(res1.body.firstName).toEqual('Andrew');
-    expect(res1.body.lastName).toEqual('Mayer');
-
-    expect(res2.statusCode).toEqual(200);
-    expect(res2.body.firstName).toEqual('Andrew');
-    expect(res2.body.lastName).toEqual('Mayer');
+    users.map((user, i) => {
+      expect(res[i].statusCode).toEqual(200);
+      expect(res[i].body.firstName).toEqual(user.firstName);
+      expect(res[i].body.lastName).toEqual(user.lastName);
+    });
   });
 });

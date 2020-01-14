@@ -1,4 +1,4 @@
-const { Users, Repos } = require("../../../models");
+const { Users, Repos } = require('../../../models');
 
 const getAllUsers = async (req, res) => {
   const users = await Users.findAll();
@@ -10,14 +10,14 @@ const createUser = async (req, res) => {
   try {
     const user = await Users.create({
       firstName,
-      lastName
+      lastName,
     });
     res.status(201);
     res.end(`Added user: ${user.id}`);
   } catch (e) {
     res.status(400);
     console.error(e);
-    res.end("Invalid request");
+    res.end('Invalid request');
   }
 };
 
@@ -33,8 +33,8 @@ const getUsersRepo = async (req, res) => {
 
   const repos = await Repos.findAll({
     where: {
-      userId
-    }
+      userId,
+    },
   });
   res.send(repos);
 };
