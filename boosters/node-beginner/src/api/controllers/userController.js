@@ -1,4 +1,4 @@
-const { Users, Repos } = require('../../../models');
+const { Users, Repos } = require("../../../models");
 
 const getAllUsers = async (req, res) => {
   const users = await Users.findAll();
@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
   } catch (e) {
     res.status(400);
     console.error(e);
-    res.end('Invalid request');
+    res.end("Invalid request");
   }
 };
 

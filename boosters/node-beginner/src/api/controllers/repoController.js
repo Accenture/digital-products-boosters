@@ -1,4 +1,4 @@
-const { Repos } = require('../../../models');
+const { Repos } = require("../../../models");
 
 const getAllRepos = async (req, res) => {
   const repos = await Repos.findAll();
@@ -16,11 +16,11 @@ const createRepo = async (req, res) => {
       isPrivate,
     });
     res.status(201);
-    res.end('Added repo');
+    res.end("Added repo");
   } catch (e) {
     res.status(400);
     console.error(e);
-    res.end('Invalid request');
+    res.end("Invalid request");
   }
 };
 

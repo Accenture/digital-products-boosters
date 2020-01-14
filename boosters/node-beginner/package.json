@@ -24,5 +24,10 @@
     "setup:dev": "sequelize db:migrate"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "prettier": {
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "printWidth": 100
+  }
 }

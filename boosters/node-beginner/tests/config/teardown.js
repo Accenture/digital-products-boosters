@@ -1,4 +1,4 @@
-const db = require('../../models');
+const db = require("../../models");
 
 module.exports = async () => {
   await Promise.all([db.Users.truncate(), db.Repos.truncate()]);

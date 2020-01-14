@@ -1,19 +1,19 @@
-const request = require('supertest');
-const app = require('../src/app');
-const teardown = require('./config/teardown');
-const uuid = require('uuid/v4');
+const request = require("supertest");
+const app = require("../src/app");
+const teardown = require("./config/teardown");
+const uuid = require("uuid/v4");
 
 const user = {
-  firstName: 'Andrew',
-  lastName: 'Mayer',
+  firstName: "Andrew",
+  lastName: "Mayer",
   id: uuid(),
 };
-describe('test', () => {
+describe("test", () => {
   afterAll(teardown);
 
-  it('should', async () => {
+  it("should", async () => {
     const res = await request(app)
-      .post('/users/')
+      .post("/users/")
       .send(user);
     expect(res.statusCode).toEqual(201);
   });

@@ -1,9 +1,9 @@
-'use strict';
-const uuid = require('uuid/v4');
+"use strict";
+const uuid = require("uuid/v4");
 
 module.exports = (sequelize, DataTypes) => {
   const Users = sequelize.define(
-    'Users',
+    "Users",
     {
       firstName: {
         allowNull: false,
@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       bio: DataTypes.TEXT,
       username: DataTypes.STRING,
     },
-    {},
+    {}
   );
   Users.associate = function(models) {
-    Users.hasMany(models.Repos, { foreignKey: 'userId' });
+    Users.hasMany(models.Repos, { foreignKey: "userId" });
   };
   Users.beforeCreate(user => (user.id = uuid()));
 
