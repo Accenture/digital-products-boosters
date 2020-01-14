@@ -1,0 +1,303 @@
+import { MinuteTimer } from "../components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+import CodeLayout from "./code-layout";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## GraphQL (JS) - Meeting 4
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/4">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/11">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [Apollo GraphQL - Understanding Pagination](https://blog.apollographql.com/understanding-pagination-rest-graphql-and-relay-b10f835549e7)
+2. [Apollo GraphQL - Explaining GraphQL Connections](https://blog.apollographql.com/explaining-graphql-connections-c48b7c3d6976)
+3. [GraphQL - Pagination](https://graphql.org/learn/pagination/)
+4. [Apollo Server Pagination - See note below](https://www.robinwieruch.de/graphql-apollo-server-tutorial#apollo-server-pagination)
+
+For reading #4, only read Pagination in GraphQL with Apollo Server.
+
+---
+
+<CodeLayout>
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. Setup a local Postgres database. You can either:
+  
+  a. Install using the `brew install postgres`
+
+  b. Install Docker Desktop (`brew cask install docker`), then run:
+
+```bash
+docker run -d --rm -p 5432:5432 postgres
+# Explanation of arguments
+# -d Runs as a daemon (in the background)
+# --rm Removes the docker container once it stops
+# -p 5432:5432 Binds port 5432 in the container to the same port on the host
+```
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+## Setup 🛠 - cont.
+
+3. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/graphql-js/meeting-2
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn db:create
+$ yarn db:migrate
+$ yarn setup:test
+$ yarn test # you should see failing tests
+```
+
+</CodeLayout>
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+What are the drawbacks of paginating with page numbers in a REST endpoint (i.e. adding `?page=2&page_size=20` query params)? How does cursor based pagination solve these problems?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+Paginating with page numbers is prone to either showing duplicate items if items are added to previous pages or skipping items if items are removed from previous pages. Cursor based pagination avoids these problems because it uses a cursor to point to a specific place in the list (but not a list item). For example, let’s suppose that the cursor is a timestamp. After requesting the first 20 items in a list, the response would include the cursor which would be the timestamp of the 20th item. A subsequent request would get the first 20 items which occur after the cursor timestamp. This approach works regardless of item additions or deletions.
+
+---
+
+<CodeLayout>
+
+# Discussion Question #2
+
+Say you have User, Group, and Membership models. A group has many users through memberships. We implement the connection to our right so we can paginate all the users in a group. In this query what do the edges and node refer to? Also, where in this query would you add a field to denote when a user joined the group?
+
+```JSON
+{
+  group(id: “1”) {
+    usersConnection {
+      edges {
+        node {
+          id
+        }
+        cursor
+      }
+    }
+  }
+}
+```
+
+<MinuteTimer minutes={5} isDiscussion />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #2 - Answer
+
+The `edges` refer to `Membership` objects and the `node` refers to a `User` object. A `Membership` object is created to represent a user joining a group, so it’s `created_at` timestamp would denote when a user joined a group. Thus, we would add a `createdAt` field under `edges` to provide this information.
+
+```JSON
+{
+  group(id: “1”) {
+    usersConnection {
+      edges {
+        createdAt
+        node {
+          id
+        }
+        cursor
+      }
+    }
+  }
+}
+```
+
+</CodeLayout>
+
+---
+
+# Discussion Question #3
+
+Cursors should be opaque. What does this mean and why is this a best practice?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+A timestamp cursor could be `2018-12-09T19:23:54.999Z`. An opaque timestamp cursor would be `MjAxOC0xMi0wOVQxOToyMzo1NC45OTla` which is the same datetime but base-64 encoded. This is a best practice because if the cursor is not opaque, then we are leaking implementation details. If a front end developer understands how a cursor works, then they might be tempted to write code to generate their own cursors. If this occurs, then the front end clients might break if the back end changes how cursors are implemented. By making cursors opaque, front end clients are encouraged to only use cursors that were generated by the server, and thus, the back end is free to change the cursor implementation as need be.
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+You’ll continue to develop your own GraphQL schema using the best practices from the readings in the following exercises!
+
+---
+
+<CodeLayout>
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Run the following commands:
+
+```bash
+$ yarn setup:meeting-4
+$ yarn test
+```
+
+3. Fix the failing test by updating the necessary code.
+
+_Hint_: A custom Date GraphQL scalar type has been provided for you. 	You can use it like any other GraphQL scalar type.
+
+<MinuteTimer minutes={10} />
+
+</CodeLayout>
+
+---
+
+# Exercise 0 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 1
+
+1. Change all `xdescribe` to `describe` in
+
+```bash
+tests/01_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 2
+
+1. Change all `xdescribe` to `describe` in
+
+```bash
+tests/02_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer]()
+
+For conciseness, this solution doesn’t make use of `args.orderBy.field` and hard codes the `createdAt` column because there is only one field to order by. If there were multiple fields, this code would be updated to `utilize args.orderBy.field` to determine the order column.
+
+---
+
+# Exercise 3
+
+1. Change all `xdescribe` to `describe` in
+
+```bash
+tests/03_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 3 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 4
+
+1. Change all `xdescribe` to `describe` in
+
+```bash
+tests/04_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the code as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 4 - Answer
+
+[Click to see answer]()
+
+The extra fields `collaborators` and `pageInfo` are not necessary to do pagination, but make it convenient for front end developers to perform pagination by making it straightforward to get the paginated data that they need.
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️

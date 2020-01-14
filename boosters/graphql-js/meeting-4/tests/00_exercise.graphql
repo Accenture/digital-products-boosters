@@ -1,0 +1,10 @@
+query exercise_0($id: ID!) {
+  repository(id: $id) {
+    id
+    collaboratorsConnection {
+      edges {
+        joinedAt
+      }
+    }
+  }
+}

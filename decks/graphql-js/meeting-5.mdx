@@ -1,0 +1,103 @@
+import { MinuteTimer } from "../components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+import CodeLayout from "./code-layout";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## GraphQL (JS) - Meeting 5
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/2">Discussion Questions 🤔</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [Hackernoon - From Zero to GraphQL Subscriptions](https://hackernoon.com/from-zero-to-graphql-subscriptions-416b9e0284f3)
+2. [Apollo GraphQL - Introducting @defer](https://blog.apollographql.com/introducing-defer-in-apollo-server-f6797c4e9d6e)
+3. [Apollo GraphQL - The GraphQL stack](https://blog.apollographql.com/the-graphql-stack-how-everything-fits-together-35f8bf34f841)
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+What are GraphQL subscriptions? What is an advantage of subscriptions over employing a pub-sub system via a Websocket connection?
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+They are the third operation that GraphQL supports. Subscription allows clients to subscribe to specific server events and receive information about them. An advantage over a typical pub-sub system via Websockets is that it prevents leaking of implementation details and doesn’t burden the clients with how the event source stream works.
+
+---
+
+# Discussion Question #2
+
+What is schema stitching?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #2 - Answer
+
+Schema stitching allows the combination of multiple GraphQL schemas into one. For example, if our app leverages the Github API, we could simply stitch Github API schema into our own GraphQL schema. Our front end clients would simply continue to interact with only the GraphQL endpoint on our server, but would have access to all the capabilities of the Github GraphQL API.
+
+---
+
+# Discussion Question #3
+
+A GraphQL query is running slowly. How should you identify the performance issue?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+If your server implementation supports it, you should use tracing. It gives you insights into how long each resolver takes to run. In general, you’ll want to look for the resolver which took the longest to resolve and try to speed that up by batching database calls, writing custom database queries, caching results, and/or other performance strategies.
+
+---
+
+# Discussion Question #4
+
+A GraphQL query is running slowly, and you’ve identified the resolver(s) that are slow. However, you don’t have time to do any back end work and/or you don’t have access to the back end. What should you do?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #4 - Answer
+
+The simplest approach is to split up your GraphQL query into two queries where one query has the slow resolvers. By doing so, you should be able to display some of the page quickly and then eventually show the complete page once the slow query returns. However, if your server implementation supports the defer directive, you can keep a single query and just add @defer to your slow resolvers.
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️

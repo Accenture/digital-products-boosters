@@ -1,0 +1,3 @@
+query exercise_0 {
+  myTextField
+}

@@ -1,0 +1,5 @@
+query exercise_3($id: ID!) {
+  repository(id: $id) {
+    name
+  }
+}
