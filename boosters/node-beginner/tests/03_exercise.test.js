@@ -1,5 +1,5 @@
 const request = require("supertest");
-const app = require("../src/app");
+const app = require("../src/server");
 const teardown = require("./config/teardown");
 const uuid = require("uuid/v4");
 
@@ -8,10 +8,10 @@ const user = {
   lastName: "Mayer",
   id: uuid(),
 };
-describe("test", () => {
+describe("Create User", () => {
   afterAll(teardown);
 
-  it("should", async () => {
+  it("Should create a user", async () => {
     const res = await request(app)
       .post("/users/")
       .send(user);

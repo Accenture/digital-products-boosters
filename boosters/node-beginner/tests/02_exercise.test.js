@@ -1,13 +1,12 @@
 const request = require("supertest");
-const app = require("../src/app");
-const userSetup = require("./config/setup")("Users");
-const repoSetup = require("./config/setup")("Repos");
+const app = require("../src/server");
+const setup = require("./config/setup");
 const teardown = require("./config/teardown");
 const uuid = require("uuid/v4");
 
 const users = [
   { firstName: "Andrew", lastName: "Mayer", id: uuid() },
-  { firstName: "Andrew", lastName: "Mayer", id: uuid() },
+  { firstName: "Liang", lastName: "Chen", id: uuid() },
 ];
 
 const repos = users.reduce(
@@ -19,13 +18,13 @@ const repos = users.reduce(
   []
 );
 
-describe("test", () => {
+describe("User Repos", () => {
   beforeAll(async () => {
-    await userSetup(users)();
-    return repoSetup(repos)();
+    await setup("Users", users)();
+    return setup("Repos", repos)();
   });
   afterAll(teardown);
-  it("should return all repos of a given userId", async () => {
+  it("Should return all repos of a given userId", async () => {
     res = await Promise.all(users.map(user => request(app).get(`/users/${user.id}/repos`)));
 
     res.map(res => {

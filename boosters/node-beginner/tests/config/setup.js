@@ -1,3 +1,9 @@
 const db = require("../../models");
 
-module.exports = database => data => async () => db[database].bulkCreate(data);
+const create = (database, data) => async () => {
+  return db[database].bulkCreate(data).catch(e => {
+    e.errors.map(e => console.error(e.message));
+  });
+};
+
+module.exports = create;
