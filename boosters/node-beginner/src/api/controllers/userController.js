@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
   try {
     const user = await Users.create({
       firstName,
-      lastName
+      lastName,
     });
     res.status(201);
     res.end(`Added user: ${user.id}`);
@@ -33,8 +33,8 @@ const getUsersRepo = async (req, res) => {
 
   const repos = await Repos.findAll({
     where: {
-      userId
-    }
+      userId,
+    },
   });
   res.send(repos);
 };

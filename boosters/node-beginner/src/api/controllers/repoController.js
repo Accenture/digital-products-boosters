@@ -13,7 +13,7 @@ const createRepo = async (req, res) => {
     await Repos.create({
       name,
       userId,
-      isPrivate
+      isPrivate,
     });
     res.status(201);
     res.end("Added repo");

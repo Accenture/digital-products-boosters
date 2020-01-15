@@ -7,20 +7,21 @@ module.exports = (sequelize, DataTypes) => {
     {
       firstName: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       lastName: {
         allowNull: false,
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
       },
       bio: DataTypes.TEXT,
-      username: DataTypes.STRING
+      username: DataTypes.STRING,
     },
     {}
   );
   Users.associate = function(models) {
-    Users.hasMany(models.Repos);
+    Users.hasMany(models.Repos, { foreignKey: "userId" });
   };
   Users.beforeCreate(user => (user.id = uuid()));
+
   return Users;
 };

@@ -13,12 +13,21 @@
     "sqlite3": "^4.1.1",
     "uuid": "^3.3.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_ENV=test jest -b -i --colors ",
     "start": "nodemon ./src/app.js",
-    "db:setup": "sequelize db:migrate"
+    "setup:test": "NODE_ENV=test sequelize db:migrate",
+    "setup:dev": "sequelize db:migrate"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "prettier": {
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "printWidth": 100
+  }
 }
