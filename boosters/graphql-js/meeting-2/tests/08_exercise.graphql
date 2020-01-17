@@ -1,0 +1,12 @@
+mutation exercise_8($input: CreateUserInput!) {
+  createUser(input: $input) {
+    user {
+      bio
+      firstName
+      id
+      lastName
+      pictureUrl
+      username
+    }
+  }
+}

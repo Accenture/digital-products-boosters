@@ -1,0 +1,13 @@
+query exercise_2($id: ID!, $orderBy: CollaboratorOrder) {
+  repository(id: $id) {
+    id
+    collaboratorsConnection(orderBy: $orderBy) {
+      edges {
+        cursor
+        node {
+          id
+        }
+      }
+    }
+  }
+}
