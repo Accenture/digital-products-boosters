@@ -10,8 +10,8 @@ const users = [
 ];
 
 describe("Get All Users", () => {
-  beforeAll(setup("Users", users));
-  afterAll(teardown);
+  beforeEach(setup("Users", users));
+  afterEach(teardown);
   it("Should return all users", async () => {
     const res = await request(app).get("/users/");
     expect(res.statusCode).toEqual(200);

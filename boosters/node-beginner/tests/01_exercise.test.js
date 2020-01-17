@@ -10,8 +10,8 @@ const users = [
 ];
 
 describe("Specific user", () => {
-  beforeAll(setup("Users", users));
-  afterAll(teardown);
+  beforeEach(setup("Users", users));
+  afterEach(teardown);
 
   it("Should return user profile given speicifc userId", async () => {
     res = await Promise.all(users.map(user => request(app).get(`/users/${user.id}`)));

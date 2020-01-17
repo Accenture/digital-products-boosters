@@ -19,11 +19,11 @@ const repos = users.reduce(
 );
 
 describe("User Repos", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await setup("Users", users)();
     return setup("Repos", repos)();
   });
-  afterAll(teardown);
+  afterEach(teardown);
   it("Should return all repos of a given userId", async () => {
     res = await Promise.all(users.map(user => request(app).get(`/users/${user.id}/repos`)));
 

@@ -19,7 +19,7 @@ const repo = {
 };
 
 describe("Create Repo", () => {
-  beforeAll(setup("Users", user));
+  beforeEach(setup("Users", user));
   afterAll(teardown);
 
   it("Should create a repo", async () => {

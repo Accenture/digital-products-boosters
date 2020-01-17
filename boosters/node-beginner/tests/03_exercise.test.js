@@ -9,7 +9,7 @@ const user = {
   id: uuid(),
 };
 describe("Create User", () => {
-  afterAll(teardown);
+  afterEach(teardown);
 
   it("Should create a user", async () => {
     const res = await request(app)

@@ -14,6 +14,7 @@ module.exports = {
       },
       isPrivate: {
         type: Sequelize.BOOLEAN,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

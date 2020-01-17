@@ -8,9 +8,10 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.2",
-    "sequelize-cli": "^5.5.1",
+    "pg": "^7.17.1",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.3",
-    "sqlite3": "^4.1.1",
+    "sequelize-cli": "^5.5.1",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
@@ -18,9 +19,13 @@
     "supertest": "^4.0.2"
   },
   "scripts": {
-    "test": "NODE_ENV=test jest -b -i --colors ",
+    "db:create": "yarn sequelize db:create",
+    "db:drop": "yarn sequelize db:drop",
+    "drop:test": "NODE_ENV=test yarn sequelize db:drop",
+    "db:migrate": "yarn sequelize db:migrate",
+    "test": "NODE_ENV=test jest -b -i --colors",
     "start": "nodemon ./src/app.js",
-    "setup:test": "NODE_ENV=test sequelize db:migrate",
+    "setup:test": "NODE_ENV=test yarn db:create && NODE_ENV=test yarn db:migrate",
     "setup:dev": "sequelize db:migrate"
   },
   "author": "",

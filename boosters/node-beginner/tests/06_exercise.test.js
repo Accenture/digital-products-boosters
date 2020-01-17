@@ -23,6 +23,7 @@ describe("Get Repo", () => {
     await setup("Users", users)();
     return setup("Repos", repos)();
   });
+
   afterAll(teardown);
 
   it("Should get a specific repo", async () => {

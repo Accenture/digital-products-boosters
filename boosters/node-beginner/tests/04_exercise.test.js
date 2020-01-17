@@ -19,11 +19,11 @@ const repos = users.reduce(
 );
 
 describe("Repos", () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await setup("Users", users)();
     return setup("Repos", repos)();
   });
-  afterAll(teardown);
+  afterEach(teardown);
   it("Should return all repos", async () => {
     res = await request(app).get(`/repos`);
 
