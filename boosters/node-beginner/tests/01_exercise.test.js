@@ -13,7 +13,7 @@ describe("Specific user", () => {
   beforeEach(setup("Users", users));
   afterEach(teardown);
 
-  it("Should return user profile given speicifc userId", async () => {
+  xit("Should return user profile given speicifc userId", async () => {
     res = await Promise.all(users.map(user => request(app).get(`/users/${user.id}`)));
 
     users.map((user, i) => {

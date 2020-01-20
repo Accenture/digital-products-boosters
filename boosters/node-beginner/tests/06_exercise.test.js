@@ -26,7 +26,7 @@ describe("Get Repo", () => {
 
   afterAll(teardown);
 
-  it("Should get a specific repo", async () => {
+  xit("Should get a specific repo", async () => {
     const res = await Promise.all(repos.map(repo => request(app).get(`/repos/${repo.id}`)));
     expect(res.length).toEqual(repos.length);
     res.map((res, i) => {
