@@ -35,7 +35,9 @@ const getRepo = async (req, res) => {
   const { userId } = req.body;
   const repo = await Repos.findByPk(repoId);
 
-  repo.userId === userId || repo.isPrivate === false ? res.send(repo) : res.send(null);
+  repo.userId === userId || repo.isPrivate === false
+    ? res.send(repo)
+    : res.status(401).end("Unauthorized");
 };
 
 module.exports = { getAllRepos, createRepo, getRepo };

@@ -4,8 +4,10 @@ const teardown = require("./config/teardown");
 const uuid = require("uuid/v4");
 const setup = require("./config/setup");
 
+const currentUser = { firstName: "Henry", lastName: "Chao", id: uuid() };
+
 const users = [
-  { firstName: "Henry", lastName: "Chao", id: uuid() },
+  { ...currentUser },
   { firstName: "Andrew", lastName: "Mayer", id: uuid() },
   { firstName: "Liang", lastName: "Chen", id: uuid() },
 ];
@@ -19,7 +21,7 @@ const repos = users.reduce(
   []
 );
 
-describe("Not sure yet", () => {
+describe("Public/Private Repo Authorization", () => {
   beforeAll(async () => {
     await setup("Users", users)();
     return setup("Repos", repos)();
@@ -28,50 +30,41 @@ describe("Not sure yet", () => {
   afterAll(teardown);
 
   xit("Should return all public repositories and all repositories of current user", async () => {
-    const res = await Promise.all(
-      users.map(user =>
-        request(app)
-          .get("/repos/")
-          .send({ userId: user.id })
-      )
+    const res = await request(app)
+      .get("/repos/")
+      .send({ userId: currentUser.id });
+
+    res.body.map(res =>
+      expect(res.userId === currentUser.id || res.isPrivate === false).toEqual(true)
     );
-    const test = res.reduce(
-      (acc, curr1, index) =>
-        acc &&
-        curr1.body.reduce(
-          (acc, curr) => acc && (users[index].id === curr.userId || !curr.isPrivate),
-          true
-        ),
-      true
-    );
-    expect(test).toEqual(true);
   });
 
-  it("Should return a single repository if it's either public or owned by current user. Otherwise return null", async () => {
-    const res = await Promise.all(
-      users.map(async user => {
-        return await Promise.all(
-          repos.map(repo =>
-            request(app)
-              .get(`/repos/${repo.id}`)
-              .send({ userId: user.id })
-          )
-        );
-      })
-    );
-    const test = res.reduce(
-      (acc, userRequests, index) =>
-        acc &&
-        userRequests.reduce(
-          (acc, userRequest) =>
-            acc &&
-            ((Object.entries(userRequest).length === 0 && userRequest.constructor === Object) ||
-              !userRequest.body.isPrivate ||
-              users[index].id === userRequest.body.userId),
-          true
-        ),
-      true
-    );
-    expect(test).toEqual(true);
+  xit("Should return a single repository if it's public", async () => {
+    const { id } = repos.find(repo => repo.isPrivate === false);
+    const res = await request(app)
+      .get(`/repos/${id}`)
+      .send({ userId: currentUser.id });
+
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.isPrivate).toEqual(false);
+  });
+
+  xit("Should return a single repository if it's owned by current user", async () => {
+    const { id } = repos.find(repo => repo.userId === currentUser.id);
+    const res = await request(app)
+      .get(`/repos/${id}`)
+      .send({ userId: currentUser.id });
+
+    expect(res.statusCode).toEqual(200);
+    expect(res.body.userId).toEqual(currentUser.id);
+  });
+
+  xit("Should not return a repository if it's not owned by current user and is private", async () => {
+    const { id } = repos.find(repo => repo.userId !== currentUser.id && repo.isPrivate === true);
+    const res = await request(app)
+      .get(`/repos/${id}`)
+      .send({ userId: currentUser.id });
+
+    expect(res.statusCode).toEqual(401);
   });
 });
