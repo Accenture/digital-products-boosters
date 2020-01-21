@@ -27,7 +27,7 @@ import Split from './split';
         <Link to="/3">Discussion Questions 🤔</Link>
       </li>
       <li>
-        <Link to="/6">Exercises 💪🏼</Link>
+        <Link to="/10">Exercises 💪🏼</Link>
       </li>
     </ol>
   </div>
@@ -49,6 +49,18 @@ import Split from './split';
 
 ## Setup 🛠
 
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/node-beginner/meeting-3
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn test # you should see failing tests
+```
+
 </CodeLayout>
 
 ---
@@ -59,47 +71,160 @@ _To be discussed during the meeting_
 
 ---
 
-<CodeLayout>
-
 # Discussion Question #1
 
-TODO
+When choosing the method for a route, when might you want to use a GET method rather than a POST method? Or a POST method over a PUT method?
 
 <MinuteTimer minutes={5} isDiscussion />
 
-</CodeLayout>
-
 ---
-
-<CodeLayout>
 
 # Discussion Question #1 - Answer
 
-TODO
+When designing a RESTful API, choosing route methods to match the desired behaviour of the endpoint can help keep your APIs consistent, as well as help the client understand the purpose of the route. For example, GET methods are generally used for routes to retreive records or resources. POST methods are used for routes which will be creating new resources. PUT methods are used for routes which are updating existing resources.
+
+With this convention, we can expose a single API route (for example, `/user`), and have different functionality performed on user records based on the method of the API call.
+
+---
+
+# Discussion Question #2
+
+Calling the `next()` function is an integral part of middleware design within the Express framework. What are some example middlewares which would call `next()` and continue the execution at the next middleware layer?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+<CodeLayout>
+
+# Discussion Question #2 - Answer
+
+You can call an authentication middleware first in a route to check for a user's identity and access before continuing the execution into the next middleware layer. If the user successfully authenticates and is provisoned access to the resource, the middleware can call the `next()` function to continue onto the next middleware layer. If instead the user is not authorized, we can just directly return an error message from the authentication middleware layer and complete the execution.
+
+Another example middleware layer would include a logging middleware layer, where we might want to set logging specific configuration details for each route, such as logging at a DEBUG or INFO level of details, or if we want to log some routes to a specific log file on the system.
 
 </CodeLayout>
 
 ---
 
+# Discussion Question #3
+
+Express middleware functions have the ability to access and modify request and response objects before passing execution to the next middleware function. In what situations might you want to modify those values before calling `next()`?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
 <CodeLayout>
+
+# Discussion Question #3 - Answer
+
+You may want to modify request objects in order to attach additional information to the session which may not be provided by the client. For example, perhaps the application utilizes information about what groups a user is a part of in order to handle some business logic in its execution. Rather than rely on the client to provide that information (which may not necessarily be trusted if the request is coming from a malicious user), we instead use a middleware layer that queries our backend to pull that information, then attaches a list of the user's groups to the request object for the later middleware layers to reference. Since this user group information is used across many routes, the code becomes more reusable as an express middleware, rather than rely on each application controller function to perform that check.
+
+</CodeLayout>
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+_Pro Tip: You should be able to build the following components by getting the tests to pass. However, you can run `yarn start` and [visit your local server](http://localhost:3000) to see what you're building_
+
+---
 
 # Exercise 0
 
-TODO
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating component file(s) as necessary.
 
-<MinuteTimer minutes={5} />
-
-</CodeLayout>
+<MinuteTimer minutes={10} />
 
 ---
 
-<CodeLayout>
-
 # Exercise 0 - Answer
 
-TODO
+[Click to see answer]()
 
-</CodeLayout>
+---
+
+# Exercise 1
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-1.test.js
+```
+
+2. Get the failing tests to pass, by updating the file(s) as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 2
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-2.test.js
+```
+
+2. Get the failing tests to pass, by updating the file(s) as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 3
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-3.test.js
+```
+
+2. Get the failing tests to pass, by updating the file(s) as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 3 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 4
+
+1. Within the meeting folder, change `xdescribe` to `describe` in
+
+```bash
+src/exercises/exercise-4.test.js
+```
+
+2. Get the failing tests to pass, by updating the file(s) as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 4 - Answer
+
+[Click to see answer]()
 
 ---
 
