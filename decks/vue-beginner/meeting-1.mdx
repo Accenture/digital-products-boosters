@@ -1,0 +1,183 @@
+import { MinuteTimer } from "../components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## Beginner Vue - Meeting 1
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/3">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/11">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [Vue Docs - Introduction](https://vuejs.org/v2/guide/index.html)
+2. [Vue Docs - The Vue Instance](https://vuejs.org/v2/guide/instance.html)
+3. [Vue Docs - Template Syntax](https://vuejs.org/v2/guide/syntax.html)
+4. [Vue Docs - Computed Properties and Watchers](https://vuejs.org/v2/guide/computed.html)
+
+---
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/vue-beginner/meeting-1
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn test # you should see failing tests
+```
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+What is a directive? What are some application rendering behaviors made possible by directives?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+Directives, which are prefixed with `v-`, are provided as html-attributes
+in a Vue instance's template. When parsing your template into a DOM for your
+browser, Vue recognizes these directives and is able to apply rendering behavior
+that is reactive a component's state. There are many directives recognized by Vue,
+but some of the most commonly used application behaviors they enable are:
+
+- Binding html attributes to a Vue instance's state
+- Conditionally rendering elements, or applying a loop to render a list of elements.
+- Attaching event listeners to elements that invoke callback methods on a Vue instance.
+
+---
+
+# Discussion Question #2
+
+Consider the left vue instance and template. What would you expect to render
+before and after the two lines of code on the right run?
+
+<Split>
+
+<!-- prettier-ignore -->
+```javascript
+const vm = new Vue({
+  el: '#app',
+  data: { name: 'Sophia' }
+});
+<div id="app">
+  {{ name }} is {{ age }} years old.
+</div>
+```
+
+<!-- prettier-ignore -->
+```
+vm.name = 'Elliot';
+vm.age = 31;
+```
+
+</Split>
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #2 - Answer
+
+<Split>
+
+**Before:** Sophia is years old.
+
+**After:** Elliot is years old.
+
+</Split>
+
+
+Vue determines which data properties to be reactive to while rendering
+the DOM when the instnace is first created. Because the `age` data prop was added after
+the it's creation, it is not accessible during render.
+
+This restriction eliminates edge cases, but it also enforces a good
+maintainability practice. The `data` object should be treated as the
+schema for your component's state. Declaring all reactive properties
+up front makes your code easier to read for a future developer.
+
+_*Note that attempting to render this undefined `age` property will cause
+a warning to print to your console._
+
+---
+
+# Discussion Question #3
+
+What is a computed property? Why would you define a computed property
+instead of a method for rendering values in a template?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+A computed property is a value calculated from one or more properties
+in a Vue instance's `data` object. The value is set as the output of a
+getter function defined in the `computed` object of the instance. Vue
+will recalculate this value if a dependant `data` property changes.
+
+<Split>
+
+<!-- prettier-ignore -->
+```javascript
+function fullName() {
+  return this.firstName +
+  " " +
+  this.lastName;
+}
+```
+
+As a method, this `fullName` property would be recalculated on every single
+rerender of the DOM. However as a computed property it's value would only update when
+either `firstName` or `lastName` changes. This is especially valuable
+for more expensive calculations.
+
+</Split>
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️
