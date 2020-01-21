@@ -40,13 +40,14 @@ describe("Public/Private Repo Authorization", () => {
   });
 
   xit("Should return a single repository if it's public", async () => {
-    const { id } = repos.find(repo => repo.isPrivate === false);
+    const { id } = repos.find(repo => repo.isPrivate === false && repo.userId !== currentUser.id);
     const res = await request(app)
       .get(`/repos/${id}`)
       .send({ userId: currentUser.id });
 
     expect(res.statusCode).toEqual(200);
     expect(res.body.isPrivate).toEqual(false);
+    expect(res.body.userId !== currentUser.id);
   });
 
   xit("Should return a single repository if it's owned by current user", async () => {
