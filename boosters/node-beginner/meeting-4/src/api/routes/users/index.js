@@ -7,6 +7,5 @@ router
   .get(userController.getAllUsers)
   .post(userController.createUser);
 router.get("/:userId", userController.getUser);
-router.get("/:userId/repos", userController.getUsersRepo);
 
 module.exports = router;
