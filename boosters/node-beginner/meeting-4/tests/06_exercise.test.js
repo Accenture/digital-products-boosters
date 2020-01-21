@@ -1,8 +1,8 @@
 const request = require("supertest");
 const app = require("../src/server");
-const setup = require("./config/setup");
 const teardown = require("./config/teardown");
 const uuid = require("uuid/v4");
+const setup = require("./config/setup");
 
 const users = [
   { firstName: "Andrew", lastName: "Mayer", id: uuid() },
@@ -18,16 +18,21 @@ const repos = users.reduce(
   []
 );
 
-describe("Repos", () => {
-  beforeEach(async () => {
+describe("Get Repo", () => {
+  beforeAll(async () => {
     await setup("Users", users)();
     return setup("Repos", repos)();
   });
-  afterEach(teardown);
-  xit("Should return all repos", async () => {
-    res = await request(app).get(`/repos`);
 
-    expect(res.statusCode).toEqual(200);
-    expect(res.body.length).toEqual(repos.length);
+  afterAll(teardown);
+
+  xit("Should get a specific repo", async () => {
+    const res = await Promise.all(repos.map(repo => request(app).get(`/repos/${repo.id}`)));
+    expect(res.length).toEqual(repos.length);
+    res.map((res, i) => {
+      expect(res.statusCode).toEqual(200);
+      expect(res.body.name).toEqual(repos[i].name);
+      expect(res.body.id).toEqual(repos[i].id);
+    });
   });
 });
