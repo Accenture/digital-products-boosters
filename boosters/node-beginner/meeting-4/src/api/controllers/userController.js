@@ -28,4 +28,14 @@ const getUser = async (req, res) => {
   res.send(user);
 };
 
-module.exports = { getAllUsers, createUser, getUser };
+const getUsersRepo = async (req, res) => {
+  const { userId } = req.params;
+
+  const repos = await Repos.findAll({
+    where: {
+      userId,
+    },
+  });
+  res.send(repos);
+};
+module.exports = { getAllUsers, createUser, getUser, getUsersRepo };

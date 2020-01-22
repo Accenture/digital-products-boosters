@@ -7,4 +7,9 @@ const getAllRepos = async (req, res) => {
   res.send(repos);
 };
 
-module.exports = { getAllRepos };
+const getRepo = async (req, res) => {
+  const { repoId } = req.params;
+  const repo = await Repos.findByPk(repoId);
+  res.send(repo);
+};
+module.exports = { getAllRepos, getRepo };
