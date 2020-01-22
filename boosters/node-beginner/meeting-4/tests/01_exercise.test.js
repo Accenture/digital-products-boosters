@@ -45,9 +45,7 @@ describe("Public/Private Repo Authorization", () => {
       .get(`/users/${id}/repos`)
       .send({ userId: currentUser.id });
 
-    res.body.map(res =>
-      expect(res.userId !== currentUser.id && res.isPrivate === false).toEqual(true)
-    );
+    res.body.map(res => expect(res.userId === id && res.isPrivate === false).toEqual(true));
   });
 
   xit("Should return all repositories if viewing your own repositories", async () => {
@@ -58,7 +56,7 @@ describe("Public/Private Repo Authorization", () => {
     res.body.map(res => expect(res.userId === currentUser.id).toEqual(true));
   });
 
-  xit("Should return a single repository if it's public", async () => {
+  xit("Should return a single repository that current user doesn't own if public", async () => {
     const { id } = repos.find(repo => repo.isPrivate === false && repo.userId !== currentUser.id);
     const res = await request(app)
       .get(`/repos/${id}`)
@@ -66,7 +64,7 @@ describe("Public/Private Repo Authorization", () => {
 
     expect(res.statusCode).toEqual(200);
     expect(res.body.isPrivate).toEqual(false);
-    expect(res.body.userId !== currentUser.id);
+    expect(res.body.userId !== currentUser.id).toEqual(true);
   });
 
   xit("Should return a single repository if it's owned by current user", async () => {

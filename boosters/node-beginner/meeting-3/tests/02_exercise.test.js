@@ -18,3 +18,6 @@ describe("Create User", () => {
     expect(res.statusCode).toEqual(201);
   });
 });
+
+//Move to 4
+//Return Name&ID and check for it
