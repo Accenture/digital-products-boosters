@@ -39,6 +39,25 @@ describe("Public/Private Repo Authorization", () => {
     );
   });
 
+  xit("Should return all public repositories of a specific user", async () => {
+    const { id } = users.find(user => user.id != currentUser.id);
+    const res = await request(app)
+      .get(`/users/${id}/repos`)
+      .send({ userId: currentUser.id });
+
+    res.body.map(res =>
+      expect(res.userId !== currentUser.id && res.isPrivate === false).toEqual(true)
+    );
+  });
+
+  xit("Should return all repositories if viewing your own repositories", async () => {
+    const res = await request(app)
+      .get(`/users/${currentUser.id}/repos`)
+      .send({ userId: currentUser.id });
+
+    res.body.map(res => expect(res.userId === currentUser.id).toEqual(true));
+  });
+
   xit("Should return a single repository if it's public", async () => {
     const { id } = repos.find(repo => repo.isPrivate === false && repo.userId !== currentUser.id);
     const res = await request(app)

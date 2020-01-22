@@ -22,7 +22,7 @@ describe("Create Repo", () => {
   beforeEach(setup("Users", user));
   afterAll(teardown);
 
-  xit("Should create a repo", async () => {
+  it("Should create a repo", async () => {
     const res = await request(app)
       .post("/repos/")
       .send(repo);
