@@ -24,7 +24,7 @@ describe("User Repos", () => {
     return setup("Repos", repos)();
   });
   afterEach(teardown);
-  xit("Should return all repos of a given userId", async () => {
+  it("Should return all repos of a given userId", async () => {
     res = await Promise.all(users.map(user => request(app).get(`/users/${user.id}/repos`)));
 
     res.map(res => {
