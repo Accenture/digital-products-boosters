@@ -1,0 +1,533 @@
+import { MinuteTimer } from '../components/minute-timer';
+export { theme } from './theme.js';
+import { Link } from '@reach/router';
+import CodeLayout from './code-layout';
+import Split from './split';
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## Node Beginner - Meeting 1
+
+<Split>
+  <div>
+    <div style={{ textAlign: 'left' }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ textAlign: 'left' }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/3">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/18">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [Core ES6 - From var to const/let](https://exploringjs.com/es6/ch_core-features.html#sec_from-var-to-const)
+2. [Core ES6 - Scoping](https://exploringjs.com/es6/ch_variables.html)
+3. [Core ES6 - this Keyword](https://www.codementor.io/@dariogarciamoya/understanding--this--in-javascript-du1084lyn)
+4. [Core ES6 - this Keyword with Arrow Function](https://www.codementor.io/@dariogarciamoya/understanding-this-in-javascript-with-arrow-functions-gcpjwfyuc)
+5. [Core ES6 - Promises, Async, Await](https://javascript.info/async)
+6. [Core ES6 - Template Literals](https://wesbos.com/tagged-template-literals/)
+7. [Node Design Patterns - The Module System](http://ahmed-badawy.com/blog/wp-content/uploads/2018/10/Node.js-Design-Patterns-2nd-Edition-by-Mario-Casciaro-Luciano-Mammino.pdf), page 47 - 61
+
+---
+
+<CodeLayout>
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/node-beginner/meeting-1
+$ git pull
+$ asdf install
+$ yarn install
+```
+
+</CodeLayout>
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+<CodeLayout>
+
+# Discussion Question #1
+
+<Split>
+
+```JavaScript
+var x = 3;
+
+function generator(randomize) {
+  if (randomize) {
+    var x = Math.random();
+    return x;
+  }
+  return x;
+}
+
+generator(false);
+// -> undefined
+```
+
+Returns undefined. Why?
+
+</Split>
+
+<MinuteTimer minutes={5} isDiscussion />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #1 - Answer
+
+- var = function scope
+- let/const = block scope
+
+Variables delcared with `var` are scoped to their execution context which is either the enclosing function or global. To visualize how `var` works, we can rewrite the function to
+
+```JavaScript
+function generator(randomize) {
+  var x;
+  if (randomize) {
+      x = Math.random();
+      return x;
+  }
+  return x;
+}
+```
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #2
+
+<Split>
+
+```JavaScript
+function var_func(arg) {
+  if (arg) {
+    var x = 5;
+  }
+  console.log(x);
+}
+
+function const_func(arg) {
+  if (arg) {
+    const x = 5;
+  }
+  console.log(x);
+}
+```
+
+```JavaScript
+var_func(true);
+var_func(false);
+const_func(true);
+const_func(false);
+```
+
+</Split>
+
+What are the expected results?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+</CodeLayout>
+
+---
+
+# Discussion Question #2 - Answer
+
+`var_func` is the same as the function we have seen in question 1.
+
+`x` in `const_func` is block-scoped within `if` statement blockm, therefore, calling `console.log(x)` will inevitably lead to a reference error.
+
+---
+
+<CodeLayout>
+
+# Discussion Question #3
+
+<Split>
+
+```JavaScript
+const myObject1 = {
+  myMethod: () => {
+    console.log(this);
+  }
+};
+
+const myObject2 = {
+  myMethod() {
+    console.log(this);
+  }
+};
+```
+
+```JavaScript
+const myObject3 = {
+  myArrowFunction: null,
+  myMethod() {
+    this.myArrowFunction = () => {
+      console.log(this);
+    };
+  }
+};
+
+const myFunction = () => {
+  console.log(this);
+};
+```
+
+</Split>
+
+What is `this` in each case?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #3 - Answer
+
+- In arrow function, `this` keyword is inherited
+- In non-arrow functions, `this` keyword depends on the context it was called
+
+<Split>
+  <div>
+  Case 1:
+
+```JavaScript
+myObject1.myMethod()
+// -> this === window
+```
+
+  </div>
+
+  <div>
+  Case 2:
+
+```JavaScript
+myObject2.myMethod()
+// -> this === myObject2
+```
+
+  </div>
+</Split>
+
+<Split>
+  <div>
+  Case 3:
+
+```JavaScript
+myObject3.myMethod()
+myObject3.myArrowFunction()
+// -> this === myObject3
+```
+
+  </div>
+
+  <div>
+  Case 4:
+
+```JavaScript
+myFunction()
+// -> this === window
+```
+
+  </div>
+</Split>
+
+- For case 1 and 4, since both functions are arrow functions, `this` are inherited from parents which are the window object or global object.
+- For case 2, the function is a non-arrow function, so `this` is implicitly bound to `myObject2`.
+- For case 3, we called `myObject3.myMethod` to initialize `myObject3.myArrowFunction` to an arrow function. Since `myObject3.myMethod` is a non-arrow function and its `this` refers to `myObject3` (case 2), `myObject3.myArrowFunction` inherits the same `this` reference.
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #4
+
+- Is there a benefit to using async/await over the promise.then() syntax? If so, what?
+- (True/False) All functions with the `async` keyword return a promise.
+- What is the order of the output for the code below?
+
+```JavaScript
+function topLevel() {
+  level2().then(res => {
+    console.log('one');
+  })
+}
+
+function level2() {
+  return new Promise((resolve, reject) => {
+    console.log('two');
+    resolve('Level 2');
+  }).then(x => {
+    console.log('three');
+    return level3();
+  })
+}
+
+function level3() {
+  return new Promise((resolve, reject) => {
+    console.log('four');
+    resolve('Level 3');
+  })
+}
+
+topLevel();
+```
+
+<MinuteTimer minutes={10} isDiscussion />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #4 - Answer
+
+- async/await replaces callback hell
+- true
+- The order of the output is:
+
+```
+two
+three
+four
+one
+```
+
+topLevel has to wait for level2 to resolved. level2 output `two` then resolve and output `three`. After that level3 is called and output `four`. Finally, the control is returned from level3 to level2 and to level1 where `one` is output.
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #5
+
+- When would you use a template literal over string concatenation?
+- What are good examples of when tagged template literals can be used?
+- What is the expected outputs of the code below?
+
+```JavaScript
+const name = 'Andrew';
+const lname = 'Mayer';
+const occupation = 'developer';
+function tagFunction(string, ...args) {
+  console.log(string);
+  console.log(args);
+  return 'Hello World';
+}
+
+// remove escape key '\'
+const example = tagFunction`Hi my name is $\{name} $\{lname} and I am a $\{occupation}`;
+
+console.log(example);
+```
+
+<MinuteTimer minutes={10} isDiscussion />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #5 - Answer
+
+- Template literal allows us to write string that spans multiple lines and evaluate expressions in the string.
+-
+- Outputs are:
+
+```JavaScript
+["Hi my name is ", " ", " and I am a ", ""]
+["Andrew", "Mayer", "developer"]
+Hello World
+```
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #6
+
+- Why would we use `module.exports` versus `exports`
+- How are circular dependencies resolved?
+- Why is require() synchronous and not asynchronous? What are the implications?
+
+<MinuteTimer minutes={10} isDiscussion />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #6 - Answer
+
+- Initially both `module.exports` and `exports` point to the same object. You can add properties to this object by doing either `module.exports.fname = 'John'` or `exports.lname = 'Doe'`, and the exported object will look like this `{fname: 'John', lname: 'Doe'}`. However, if you re-assign a function, object, or what have you to `exports`, the reference to the same object is lost and now `module.exports` and `exports` point to two different objects. To avoid this pitfall, use `module.exports` or re-assign both of them: `exports = module.exports = function() {}`
+- To resolve circular dependencies, we could remove one of the references or refactor the dependency. For examples, if we have A -> B -> C - D -> A, we can break the circular dependency by removing D -> A. If we have A -> B -> A, we could refactor part of B into A or into C that both A and B reference, or combine both into a single module.
+- Loading modules is done synchronously to ensure that they are initialized and ready when used.
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #7
+
+What are the expected outputs:
+
+<Split>
+<div>
+Module a
+
+```JavaScript
+console.log('a starting');
+exports.loaded = false;
+const b = require('./b');
+console.log('in a, b.loaded = %j', b.loaded);
+module.exports = {
+  bWasLoaded: b.loaded,
+  loaded: true
+}
+console.log('a done');
+```
+
+</div>
+
+<div>
+Module b
+
+```JavaScript
+console.log('b starting');
+exports.loaded = false;
+const a = require('./a');
+console.log('in b, a.loaded = %j', a.loaded);
+module.exports = {
+  aWasLoaded: a.loaded,
+  loaded: true
+}
+console.log('b done');
+```
+
+</div>
+
+</Split>
+
+<div>
+Module main
+
+```JavaScript
+console.log('main starting');
+const a = require('./a');
+const b = require('./b');
+console.log(a);
+console.log(b);
+```
+
+</div>
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Discussion Question #7 - Answer
+
+Expected outputs are:
+
+```JavaScript
+main starting
+a starting
+b starting
+in b, a.loaded = falseb done
+in a, b.loaded = true
+a done
+{ bWasLoaded: true, loaded: true }
+{ aWasLoaded: false, loaded: true }
+```
+
+`a` is required in `main`, then `a` in turn loads `b`. At this point, `b` tries to load `a`, and in order to prevent an infinite loop, `b` receives an partial copy of `a` (up to the line before `a` requires `b`), `b` assigns `a.loaded` (which is still false) to `aWasLoaded`, then finishes loading and return the exporting object to `a`.
+
+</CodeLayout>
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+Time to practice what you have learned from the readings.
+
+---
+
+<CodeLayout>
+
+# Exercise 0
+
+TODO
+
+## <MinuteTimer minutes={5} />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Exercise 0 - Answer
+
+TODO
+
+</CodeLayout>
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️

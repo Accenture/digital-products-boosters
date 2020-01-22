@@ -1,0 +1,237 @@
+import { MinuteTimer } from '../components/minute-timer';
+export { theme } from './theme.js';
+import { Link } from '@reach/router';
+import LargerLayout from './larger-layout';
+import Split from './split';
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## Node Beginner - Meeting 2
+
+<Split>
+  <div>
+    <div style={{ textAlign: 'left' }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ textAlign: 'left' }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/2">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+<LargerLayout>
+
+## Setup 🛠
+
+1. [Install Postman](https://www.getpostman.com/)
+
+2. [Get GitHub personal access token](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line#creating-a-token)
+
+3. Copy access token and paste into `Authorization` -> `Bearer Token` in Postman
+
+4. To test that it works, run a `GET` request to the following endpoint: https://api.github.com
+
+<p style={{fontSize: '0.55em', fontStyle: 'italic'}}>
+Note: Your Access Token should be kept hidden.
+</p>
+
+<p style={{fontSize: '0.55em', fontStyle: 'italic'}}>
+To learn more about variables on Postman, go here:
+https://learning.getpostman.com/docs/postman/variables-and-environments/variables/#environments-in-postman
+</p>
+
+</LargerLayout>
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+Time to practice what you have learned from the readings.
+
+---
+
+# Exercise 1
+
+Hit the endpoint that returns your user information (username, location, avatar URL, etc.)
+
+<p style={{fontSize: '0.55em', fontStyle: 'italic'}}>
+Use this documentation as a reference for all questions https://developer.github.com/v3
+</p>
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 1 - Answer
+
+GET https://api.github.com/user
+
+---
+
+# Exercise 2
+
+Ask the person to your right for their GitHub username. Use that information to get their user information (username, location, avatar URL, etc.)
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 2 - Answer
+
+GET https://api.github.com/users/:username
+
+---
+
+# Exercise 3
+
+1. List all your repositories that you are either a collaborator or owner of.
+2. Sort it by the created at date in ascending order.
+
+<MinuteTimer minutes={5} />
+
+---
+
+<LargerLayout>
+
+# Exercise 3 - Answer
+
+- GET https://api.github.com/user/repos?affiliation=owner,collaborator
+- GET https://api.github.com/user/repos?affiliation=owner,collaborator&sort=created&direction=asc
+
+</LargerLayout>
+
+---
+
+# Exercise 4
+
+1. Get a list of all repositories of person next to you.
+2. Sort by create date in descending order.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 4 - Answer
+
+- GET https://api.github.com/users/:username/repos
+- GET https://api.github.com/users/:username/repos?sort=created&direction=desc
+
+---
+
+# Exercise 5
+
+Using a repository from the solution above, check if that repository has vulnerability alerts enabled
+
+_Note: you need to include `application/vnd.github.dorian-preview+json` in the `Accept` header since this feature is still in preview._
+
+Need help? https://developer.github.com/v3/repos/#enable-vulnerability-alerts
+
+<MinuteTimer minutes={5} />
+
+---
+
+<LargerLayout>
+
+# Exercise 5 - Answer
+
+- Check if vulnerability alerts are enabled for a repository:
+  - GET https://api.github.com/repos/:owner/:repo_name/vulnerability-alerts
+  - If Repo is enabled you should see `Status: 204 No Content` in response headers
+  - If Repo is NOT enabled you should see `Status: 404 Not Found` in response headers
+- Enable vulnerability alerts for a repo:
+  - PUT https://api.github.com/repos/:owner/:repo_name/vulnerability-alerts
+- Disable vulnerability alerts for a repo:
+  - DELETE https://api.github.com/repos/:owner/:repo_name/vulnerability-alerts
+
+</LargerLayout>
+
+---
+
+# Exercise 6
+
+1. Get a list of all commits with either the words `delete` OR `ignore`
+2. Assuming 75 results per page, return page 3
+
+_Note: you need to include `application/vnd.github.cloak-preview` in the `Accept` header since this feature is still in preview._
+
+Need help? https://developer.github.com/v3/search/#search-commits
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 6 - Answer
+
+- GET `https://api.github.com/search/commits?q='delete OR ignore'`
+
+- GET `https://api.github.com/search/commits?q='delete OR ignore'&page=3&per_page=75`
+
+---
+
+# Exercise 7
+
+Get a list of all repositories with the words `test` AND `api` in the readme file.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 7 - Answer
+
+GET https://api.github.com/search/repositories?q=test+api+in:readme
+
+---
+
+# Exercise 8
+
+Create a repository with a name of `nodejs_booster_test`.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 8 - Answer
+
+POST https://api.github.com/user/repos
+
+Request body:
+
+```json
+{
+  "name": "nodejs_booster_test"
+}
+```
+
+---
+
+# Exercise 9
+
+1. Delete the repository you just created.
+2. Verify that it has been deleted.
+
+<MinuteTimer minutes={5} />
+
+---
+
+# Exercise 9 - Answer
+
+- DELETE https://api.github.com/repos/:username/:repo_name
+- GET https://api.github.com/repos/:username/:repo_name
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️
