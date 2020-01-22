@@ -1,0 +1,56 @@
+{
+  "name": "apprentice-node-starter-kit",
+  "version": "1.0.0",
+  "description": "Node.js starter kit for apprentice projects",
+  "main": "index.js",
+  "author": "David Rodriguez Fuentes <davidrf.developer@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "db:create": "yarn sequelize db:create",
+    "db:drop": "yarn sequelize db:drop",
+    "db:migrate": "yarn sequelize db:migrate",
+    "db:rollback": "yarn sequelize db:migrate:undo",
+    "generate:migration": "yarn sequelize migration:generate",
+    "sequelize": "node_modules/.bin/sequelize",
+    "start": "node_modules/.bin/nodemon ./config/routes.js",
+    "test": "NODE_ENV=test jest -b -i",
+    "setup:test": "NODE_ENV=test yarn db:create && NODE_ENV=test yarn db:migrate",
+    "setup:meeting-4": "NODE_ENV=test yarn db:drop && yarn setup:test"
+  },
+  "dependencies": {
+    "apollo-server": "^2.2.6",
+    "apollo-server-testing": "^2.2.6",
+    "dataloader": "^1.4.0",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "graphql": "^14.0.2",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.37.10",
+    "sequelize-cli": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.1.1",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.34.1",
+    "eslint-plugin-import": "^2.6.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "jest": "^23.1.0",
+    "nodemon": "^1.17.5"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

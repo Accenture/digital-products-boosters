@@ -1,0 +1,476 @@
+import { MinuteTimer } from "../components/minute-timer";
+import { Split } from "@mdx-deck/layouts";
+export { theme } from "./theme.js";
+import { Link } from "@reach/router";
+import CodeLayout from "./code-layout";
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## GraphQL (JS) - Meeting 1
+
+<Split>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ "text-align": "left" }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/3">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/10">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [How To GraphQL - Introduction](https://www.howtographql.com/basics/0-introduction/)
+2. [How To GraphQL - GraphQL is the better REST](https://www.howtographql.com/basics/1-graphql-is-the-better-rest/)
+3. [How To GraphQL - Core Concepts](https://www.howtographql.com/basics/2-core-concepts/)
+4. [How To GraphQL - Big Picture (Architecture)](https://www.howtographql.com/basics/3-big-picture/)
+5. [GraphQL - Queries and Mutations](https://graphql.org/learn/queries/)
+
+---
+
+<CodeLayout>
+
+## Setup 🛠
+
+1. Install GraphQL Playground: [Download](https://github.com/prisma-labs/graphql-playground/releases/download/v1.8.10/graphql-playground-electron-1.8.10-mac.zip)
+
+2. Generate a new Github Personal Access Token: [Instructions](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/#creating-a-token)
+
+For the scopes of the Github Personal Token, you can just select all of them. You can delete the token after book club.
+
+</CodeLayout>
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+One of the stated advantages of GraphQL is that a client only has to make a
+single request to get all the data that they need. However, you could design an
+endpoint to supply all the data that a specific screen needs. This is actually
+common in projects where we are doing both the back end and front end work.
+
+Is GraphQL still advantageous to use in these projects?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+Definitely! By designing the semi-RESTful endpoint this way, you’re decreasing
+the flexibility of your whole API. The endpoint ends up being too tightly coupled
+to one screen, and it is less likely that it can be reused for other screens.
+Consequently, clients end up having to wait for custom endpoints to be built rather
+than reusing existing endpoints. GraphQL gives clients the best of both worlds: An
+API that is flexible and reusable, yet it still allows them to retrieve the data that
+they need in a single request.
+
+---
+
+# Discussion Question #2
+
+Is over-fetching that big of a problem? Is it really that bad if the client receives
+some extra fields that they don’t use?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #2 - Answer
+
+The problem with over-fetching is the needless performance cost it incurs. For example,
+a book store app could have a book model that can potentially have a dozen associations
+(i.e. authors, categories, reviews, related books, etc.). These associations are used in
+a book details page, but they are unnecessary in a page displaying a list of book links
+where we only need the book title and id. Yet, in a REST API, the server may still make
+additional database queries for unused associations when it returns a list of books. In
+addition, some fields may be long strings (i.e. a book summary). Thus, responses are
+considerably faster when unused fields are omitted because less database queries are made
+and less data is sent over the network.
+
+---
+
+# Discussion Question #3
+
+In projects where the clients build a REST APIs that we must use for front end development,
+is there any way to utilize GraphQL? If so, does it make sense to do so?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #3 - Answer
+
+Maybe. Let’s imagine a scenario where we have Web, iOS, and Android front end clients using
+a client’s REST API which frequently has breaking changes. The main problem is that whenever
+there is a breaking change, then three different clients need to fix their networking code.
+We can solve this by introducing a GraphQL server that is a thin wrapper around the REST API,
+and the clients would instead interact with the GraphQL server. If there is a breaking change
+now, only the GraphQL server networking code needs to be fixed. An additional benefit is that
+the networking code of the clients becomes simpler. However, this solution assumes that the
+client would be open to hosting a GraphQL server. Also, this solution becomes less attractive
+if there are not as many front end clients and/or the REST API is reliable.
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+Time to practice what you have learned from the readings! In the following exercises you’ll be using GraphQL Playground, which is essentially Postman for GraphQL, and you’ll be making queries against the Github GraphQL API! After every exercise, there is a solution. However, this solution is not the only solution!
+
+---
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+
+2. Open GraphQL Playground and set https://api.github.com/graphql as the GraphQL endpoint.
+
+3. Click on "HTTP HEADERS" and add an `Authorization` header, with the value `bearer token`, where _token_ is your Github Personal Access Token.
+
+Proceed to the next slide once the environment is setup.
+
+---
+
+<CodeLayout>
+
+# Exercise 0 - cont.
+
+4. Run the GraphQL query below:
+
+```JSON
+{
+  viewer {
+    login
+  }
+}
+```
+
+<MinuteTimer minutes={5} />
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+# Exercise 0 - Answer
+
+You should see something like below in JSON on the right pane of GraphQL Playground:
+
+```JSON
+{
+  "data": {
+    "viewer": {
+      "login": "myusername"
+    }
+  }
+}
+```
+
+</CodeLayout>
+
+---
+
+# Exercise 1
+
+Write a query to get your own location, name, profile picture url, and username information.
+Also, rename the profile picture url field to be `profilePictureUrl`.
+
+Click on the *Docs* button on GraphQL Playground and explore the schema to find the information that you need.
+
+<MinuteTimer minutes={5} />
+
+---
+
+<CodeLayout>
+
+# Exercise 1 - Answer
+
+```JSON
+{ 
+  viewer {
+    profilePictureUrl: avatarUrl
+    login
+    location
+    name
+  }
+}
+```
+
+</CodeLayout>
+
+---
+
+# Exercise 2
+
+Ask the person to your right for their Github username. Using that information, write a query
+to get their location, name, profile picture url, and username. Also, rename `avatarUrl` field
+to be `profilePictureUrl`.
+
+<MinuteTimer minutes={5} />
+
+---
+
+<CodeLayout>
+
+# Exercise 2 - Answer
+
+```JSON
+{
+  user(login: "exampleuser") {
+    profilePictureUrl: avatarUrl
+    login
+    location
+    name
+  }
+}
+```
+
+</CodeLayout>
+
+---
+
+# Exercise 3
+
+Write a query that gets the location, name, profile picture url, and username of both yourself
+and the person to your right. Also, rename `avatarUrl` field to be `profilePictureUrl`.
+
+<MinuteTimer minutes={5} />
+
+---
+
+<CodeLayout>
+
+# Exercise 3 - Answer
+
+```JSON
+{
+  viewer {
+    profilePictureUrl: avatarUrl
+    login
+    location
+    name
+  }
+  user(login: "exampleuser") {
+    profilePictureUrl: avatarUrl
+    login
+    location
+    name
+  }
+}
+```
+
+</CodeLayout>
+
+---
+
+# Exercise 4
+
+Refactor your previous query to use a GraphQL fragment.
+
+<MinuteTimer minutes={5} />
+
+---
+
+<CodeLayout>
+
+# Exercise 4 - Answer
+
+```JSON
+{
+  viewer {
+    ...userFields
+  }
+  user(login: "exampleuser") {
+    ...userFields
+  }
+}
+
+fragment userFields on User {
+  profilePictureUrl: avatarUrl
+  login
+  location
+  name
+}
+```
+
+</CodeLayout>
+
+---
+
+# Exercise 5
+
+Ask the person to your left for their username. Add their information to your previous query. In your
+query, you should make sure that you are able to distinguish the difference between the person on your
+left and on your right.
+
+<MinuteTimer minutes={5} />
+
+---
+
+<CodeLayout>
+
+# Exercise 5 - Answer
+
+```JSON
+{
+  viewer {
+    ...userFields
+  }
+  leftUser: user(login: "exampleuser") {
+    ...userFields
+  }
+  rightUser: user(login: "notarealuser") {
+    ...userFields
+  }
+}
+
+fragment userFields on User {
+  profilePictureUrl: avatarUrl
+  login
+  location
+  name
+}
+```
+
+</CodeLayout>
+
+---
+
+# Exercise 6
+
+Refactor your previous query to use variables. Click on the ”Query Variables” on the bottom left of
+GraphQL Playground to open the variables pane. FYI use double quotes.
+
+<MinuteTimer minutes={5} />
+
+---
+
+<CodeLayout>
+
+# Exercise 6 - Answer
+
+```JSON
+query ($leftLogin: String!, $rightLogin: String!) {
+  viewer {
+    ...userFields
+  }
+  leftUser: user(login: $leftLogin) {
+    ...userFields
+  }
+  rightUser: user(login: $rightLogin) {
+    ...userFields
+  }
+}
+
+fragment userFields on User {
+  profilePictureUrl: avatarUrl
+  login
+  location
+  name
+}
+```
+
+Query Variable Pane
+
+```JSON
+{ "leftLogin": "exampleuser", "rightLogin": "notarealuser" }
+```
+
+</CodeLayout>
+
+---
+
+# Exercise 7
+
+Clear your previous query. Write a new query where you get the ids and names of your first 3
+pinned repositories. If you don’t have pinned repositories, then go pin some on your Github
+profile!
+
+<MinuteTimer minutes={5} />
+
+---
+
+<CodeLayout>
+
+# Exercise 7 - Answer
+
+```JSON
+{
+  viewer {
+    pinnedRepositories(first: 3) {
+      nodes {
+        id
+        name
+      }
+    }
+  }
+}
+```
+
+Note that `pinnedRepositories` is a GraphQL connection (which will be covered in Meeting 4).
+
+</CodeLayout>
+
+---
+
+# Exercise 8
+
+Pick a pinned repository that you have not starred yet (or go unstar it). Make a note of its
+id from the previous query. Write a mutation that stars the repository that you chose and
+returns whether or not the repository has been starred. For bonus points, use the query
+variables pane.
+
+---
+
+<CodeLayout>
+
+# Exercise 8 - Answer
+
+```JSON
+mutation($input: AddStarInput!) {
+  addStar(input: $input) {
+    starrable {
+      viewerHasStarred
+    }
+  }
+}
+```
+
+Query Variables Pane
+```JSON
+{ "input": { "starrableId": "MDEwOlJlcG9zaXRvcnk3NzU1NDQ3Ng==" } }
+```
+
+</CodeLayout>
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️

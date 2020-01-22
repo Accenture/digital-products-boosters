@@ -1,0 +1,5 @@
+query exercise_5($id: ID!) {
+  user(id: $id) {
+    fullName
+  }
+}

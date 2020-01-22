@@ -1,0 +1,16 @@
+query exercise_7($repositoryId: ID!, $userId: ID!) {
+  repository(id: $repositoryId) {
+    id
+    name
+    user {
+      fullName
+    }
+  }
+  user(id: $userId) {
+    id
+    fullName
+    repositories {
+      name
+    }
+  }
+}
