@@ -27,6 +27,7 @@ describe("Create Repo", () => {
       .post("/repos/")
       .send(repo);
     expect(res.statusCode).toEqual(201);
+    expect(res.body.name).toEqual("repo1");
   });
 });
 
