@@ -24,10 +24,10 @@ import Split from './split';
     <div style={{ textAlign: 'left' }}>Meeting Agenda</div>
     <ol>
       <li>
-        <Link to="/3">Discussion Questions 🤔</Link>
+        <Link to="/4">Discussion Questions 🤔</Link>
       </li>
       <li>
-        <Link to="/10">Exercises 💪🏼</Link>
+        <Link to="/7">Exercises 💪🏼</Link>
       </li>
     </ol>
   </div>
@@ -49,13 +49,36 @@ import Split from './split';
 
 1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
 
-2. From the root of the `digital-products-boosters` repository, run:
+2. Setup a local Postgres database. You can either:
+  
+  a. Install using the `brew install postgres`
+
+  b. Install Docker Desktop (`brew cask install docker`), then run:
 
 ```bash
-$ cd boosters/node-beginner/meeting-3
+docker run -d --rm -p 5432:5432 postgres
+# Explanation of arguments
+# -d Runs as a daemon (in the background)
+# --rm Removes the docker container once it stops
+# -p 5432:5432 Binds port 5432 in the container to the same port on the host
+```
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+## Setup 🛠 - cont.
+
+3. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/node-beginner/meeting-4
 $ git pull
 $ asdf install
 $ yarn install
+$ yarn setup:test
 $ yarn test # you should see failing tests
 ```
 
@@ -87,8 +110,6 @@ NodeJS receives `POST` or `PUT` request data as a `ReadableStream` object. In or
 
 _To be completed during the meeting_
 
-_Pro Tip: You should be able to build the following components by getting the tests to pass. However, you can run `yarn start` and [visit your local server](http://localhost:3000) to see what you're building_
-
 ---
 
 # Exercise 0
@@ -108,10 +129,10 @@ _Pro Tip: You should be able to build the following components by getting the te
 
 # Exercise 1
 
-1. Within the meeting folder, change `xdescribe` to `describe` in
+1. Within the meeting folder, change `xit` to `it` in
 
 ```bash
-src/exercises/exercise-1.test.js
+src/tests/01_exercise.test.js
 ```
 
 2. Get the failing tests to pass, by updating the file(s) as necessary.
@@ -128,59 +149,19 @@ src/exercises/exercise-1.test.js
 
 # Exercise 2
 
-1. Within the meeting folder, change `xdescribe` to `describe` in
+1. Within the meeting folder, change `xit` to `it` in
 
 ```bash
-src/exercises/exercise-2.test.js
+src/tests/02_exercise.test.js
 ```
 
 2. Get the failing tests to pass, by updating the file(s) as necessary.
 
-<MinuteTimer minutes={10} />
+<MinuteTimer minutes={15} />
 
 ---
 
 # Exercise 2 - Answer
-
-[Click to see answer]()
-
----
-
-# Exercise 3
-
-1. Within the meeting folder, change `xdescribe` to `describe` in
-
-```bash
-src/exercises/exercise-3.test.js
-```
-
-2. Get the failing tests to pass, by updating the file(s) as necessary.
-
-<MinuteTimer minutes={10} />
-
----
-
-# Exercise 3 - Answer
-
-[Click to see answer]()
-
----
-
-# Exercise 4
-
-1. Within the meeting folder, change `xdescribe` to `describe` in
-
-```bash
-src/exercises/exercise-4.test.js
-```
-
-2. Get the failing tests to pass, by updating the file(s) as necessary.
-
-<MinuteTimer minutes={10} />
-
----
-
-# Exercise 4 - Answer
 
 [Click to see answer]()
 

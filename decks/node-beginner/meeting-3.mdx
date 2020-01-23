@@ -24,10 +24,10 @@ import Split from './split';
     <div style={{ textAlign: 'left' }}>Meeting Agenda</div>
     <ol>
       <li>
-        <Link to="/3">Discussion Questions 🤔</Link>
+        <Link to="/4">Discussion Questions 🤔</Link>
       </li>
       <li>
-        <Link to="/10">Exercises 💪🏼</Link>
+        <Link to="/11">Exercises 💪🏼</Link>
       </li>
     </ol>
   </div>
@@ -41,7 +41,6 @@ import Split from './split';
 2. [Express - Introduction to Routing](https://expressjs.com/en/starter/basic-routing.html)
 3. [Express - Routing](https://expressjs.com/en/guide/routing.html)
 4. [Express - Writing Middleware](https://expressjs.com/en/guide/writing-middleware.html)
-5. [Express - Using Middleware](https://expressjs.com/en/guide/using-middleware.html)
 
 ---
 
@@ -51,13 +50,36 @@ import Split from './split';
 
 1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
 
-2. From the root of the `digital-products-boosters` repository, run:
+2. Setup a local Postgres database. You can either:
+  
+  a. Install using the `brew install postgres`
+
+  b. Install Docker Desktop (`brew cask install docker`), then run:
+
+```bash
+docker run -d --rm -p 5432:5432 postgres
+# Explanation of arguments
+# -d Runs as a daemon (in the background)
+# --rm Removes the docker container once it stops
+# -p 5432:5432 Binds port 5432 in the container to the same port on the host
+```
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+## Setup 🛠 - cont.
+
+3. From the root of the `digital-products-boosters` repository, run:
 
 ```bash
 $ cd boosters/node-beginner/meeting-3
 $ git pull
 $ asdf install
 $ yarn install
+$ yarn setup:test
 $ yarn test # you should see failing tests
 ```
 
@@ -81,7 +103,7 @@ When choosing the method for a route, when might you want to use a GET method ra
 
 # Discussion Question #1 - Answer
 
-When designing a RESTful API, choosing route methods to match the desired behaviour of the endpoint can help keep your APIs consistent, as well as help the client understand the purpose of the route. For example, GET methods are generally used for routes to retreive records or resources. POST methods are used for routes which will be creating new resources. PUT methods are used for routes which are updating existing resources.
+When designing a RESTful API, choosing route methods to match the desired behavior of the endpoint can help keep your APIs consistent, as well as help the client understand the purpose of the route. For example, GET methods are generally used for routes to retrieve records or resources. POST methods are used for routes which will be creating new resources. PUT methods are used for routes which are updating existing resources.
 
 With this convention, we can expose a single API route (for example, `/user`), and have different functionality performed on user records based on the method of the API call.
 
@@ -99,7 +121,7 @@ Calling the `next()` function is an integral part of middleware design within th
 
 # Discussion Question #2 - Answer
 
-You can call an authentication middleware first in a route to check for a user's identity and access before continuing the execution into the next middleware layer. If the user successfully authenticates and is provisoned access to the resource, the middleware can call the `next()` function to continue onto the next middleware layer. If instead the user is not authorized, we can just directly return an error message from the authentication middleware layer and complete the execution.
+You can call an authentication middleware first in a route to check for a user's identity and access before continuing the execution into the next middleware layer. If the user successfully authenticates and is provisioned access to the resource, the middleware can call the `next()` function to continue onto the next middleware layer. If instead the user is not authorized, we can just directly return an error message from the authentication middleware layer and complete the execution.
 
 Another example middleware layer would include a logging middleware layer, where we might want to set logging specific configuration details for each route, such as logging at a DEBUG or INFO level of details, or if we want to log some routes to a specific log file on the system.
 
@@ -129,8 +151,6 @@ You may want to modify request objects in order to attach additional information
 
 _To be completed during the meeting_
 
-_Pro Tip: You should be able to build the following components by getting the tests to pass. However, you can run `yarn start` and [visit your local server](http://localhost:3000) to see what you're building_
-
 ---
 
 # Exercise 0
@@ -138,7 +158,7 @@ _Pro Tip: You should be able to build the following components by getting the te
 1. Complete the [Setup](/2) if you haven't done so already.
 2. Get the failing tests to pass, by updating component file(s) as necessary.
 
-<MinuteTimer minutes={10} />
+<MinuteTimer minutes={8} />
 
 ---
 
@@ -150,15 +170,15 @@ _Pro Tip: You should be able to build the following components by getting the te
 
 # Exercise 1
 
-1. Within the meeting folder, change `xdescribe` to `describe` in
+1. Within the meeting folder, change `xit` to `it` in
 
 ```bash
-src/exercises/exercise-1.test.js
+src/tests/01_exercise.test.js
 ```
 
 2. Get the failing tests to pass, by updating the file(s) as necessary.
 
-<MinuteTimer minutes={10} />
+<MinuteTimer minutes={8} />
 
 ---
 
@@ -170,15 +190,15 @@ src/exercises/exercise-1.test.js
 
 # Exercise 2
 
-1. Within the meeting folder, change `xdescribe` to `describe` in
+1. Within the meeting folder, change `xit` to `it` in
 
 ```bash
-src/exercises/exercise-2.test.js
+src/tests/02_exercise.test.js
 ```
 
 2. Get the failing tests to pass, by updating the file(s) as necessary.
 
-<MinuteTimer minutes={10} />
+<MinuteTimer minutes={8} />
 
 ---
 
@@ -190,15 +210,15 @@ src/exercises/exercise-2.test.js
 
 # Exercise 3
 
-1. Within the meeting folder, change `xdescribe` to `describe` in
+1. Within the meeting folder, change `xit` to `it` in
 
 ```bash
-src/exercises/exercise-3.test.js
+src/exercises/03_exercise.test.js
 ```
 
 2. Get the failing tests to pass, by updating the file(s) as necessary.
 
-<MinuteTimer minutes={10} />
+<MinuteTimer minutes={8} />
 
 ---
 
@@ -210,15 +230,15 @@ src/exercises/exercise-3.test.js
 
 # Exercise 4
 
-1. Within the meeting folder, change `xdescribe` to `describe` in
+1. Within the meeting folder, change `xit` to `it` in
 
 ```bash
-src/exercises/exercise-4.test.js
+src/exercises/04_exercise.test.js
 ```
 
 2. Get the failing tests to pass, by updating the file(s) as necessary.
 
-<MinuteTimer minutes={10} />
+<MinuteTimer minutes={8} />
 
 ---
 

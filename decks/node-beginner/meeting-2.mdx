@@ -67,8 +67,11 @@ Time to practice what you have learned from the readings.
 Hit the endpoint that returns your user information (username, location, avatar URL, etc.)
 
 <p style={{fontSize: '0.55em', fontStyle: 'italic'}}>
-Use this documentation as a reference for all questions https://developer.github.com/v3
+Use this documentation as a reference for all questions:
 </p>
+
+
+[https://developer.github.com/v3](https://developer.github.com/v3)
 
 <MinuteTimer minutes={5} />
 
@@ -107,8 +110,12 @@ GET https://api.github.com/users/:username
 
 # Exercise 3 - Answer
 
+<div style={{ fontSize: '0.8em' }}>
+
 - GET https://api.github.com/user/repos?affiliation=owner,collaborator
 - GET https://api.github.com/user/repos?affiliation=owner,collaborator&sort=created&direction=asc
+
+</div>
 
 </LargerLayout>
 
@@ -125,8 +132,12 @@ GET https://api.github.com/users/:username
 
 # Exercise 4 - Answer
 
+<div style={{ fontSize: '0.8em' }}>
+
 - GET https://api.github.com/users/:username/repos
 - GET https://api.github.com/users/:username/repos?sort=created&direction=desc
+
+</div>
 
 ---
 
@@ -134,9 +145,13 @@ GET https://api.github.com/users/:username
 
 Using a repository from the solution above, check if that repository has vulnerability alerts enabled
 
+<div style={{ fontSize: '0.6em' }} >
+
 _Note: you need to include `application/vnd.github.dorian-preview+json` in the `Accept` header since this feature is still in preview._
 
 Need help? https://developer.github.com/v3/repos/#enable-vulnerability-alerts
+
+</div>
 
 <MinuteTimer minutes={5} />
 
@@ -145,6 +160,8 @@ Need help? https://developer.github.com/v3/repos/#enable-vulnerability-alerts
 <LargerLayout>
 
 # Exercise 5 - Answer
+
+<div style={{ fontSize: '0.8em' }} >
 
 - Check if vulnerability alerts are enabled for a repository:
   - GET https://api.github.com/repos/:owner/:repo_name/vulnerability-alerts
@@ -155,11 +172,17 @@ Need help? https://developer.github.com/v3/repos/#enable-vulnerability-alerts
 - Disable vulnerability alerts for a repo:
   - DELETE https://api.github.com/repos/:owner/:repo_name/vulnerability-alerts
 
+</div>
+
 </LargerLayout>
 
 ---
 
+<CodeLayout>
+
 # Exercise 6
+
+<div style={{ fontSize: '0.6em' }} >
 
 1. Get a list of all commits with either the words `delete` OR `ignore`
 2. Assuming 75 results per page, return page 3
@@ -168,15 +191,22 @@ _Note: you need to include `application/vnd.github.cloak-preview` in the `Accept
 
 Need help? https://developer.github.com/v3/search/#search-commits
 
+</div>
+
 <MinuteTimer minutes={5} />
+
+</CodeLayout>
 
 ---
 
 # Exercise 6 - Answer
 
-- GET `https://api.github.com/search/commits?q='delete OR ignore'`
+<div style={{ fontSize: '0.6em' }} >
 
+- GET `https://api.github.com/search/commits?q='delete OR ignore'`
 - GET `https://api.github.com/search/commits?q='delete OR ignore'&page=3&per_page=75`
+
+</div>
 
 ---
 
