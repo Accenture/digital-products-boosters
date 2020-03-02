@@ -1,0 +1,172 @@
+import { MinuteTimer } from '../components/minute-timer';
+export { theme } from './theme.js';
+import { Link } from '@reach/router';
+import CodeLayout from './code-layout';
+import Split from './split';
+
+# [Digital Products Boosters](https://accenture.github.io/digital-products-boosters)
+
+## Node Beginner - Meeting 4
+
+<Split>
+  <div>
+    <div style={{ textAlign: 'left' }}>Meeting Pre-work</div>
+    <ol>
+      <li>
+        <Link to="/1">Reading 📕</Link>
+      </li>
+      <li>
+        <Link to="/2">Setup 🛠</Link>
+      </li>
+    </ol>
+  </div>
+  <div>
+    <div style={{ textAlign: 'left' }}>Meeting Agenda</div>
+    <ol>
+      <li>
+        <Link to="/4">Discussion Questions 🤔</Link>
+      </li>
+      <li>
+        <Link to="/7">Exercises 💪🏼</Link>
+      </li>
+    </ol>
+  </div>
+</Split>
+
+---
+
+## Reading 📕
+
+1. [NodeJS - Anatomy of an http transaction](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/)
+2. [Express - Using Middleware](https://expressjs.com/en/guide/using-middleware.html)
+3. [Express - Body parser middleware](https://github.com/expressjs/body-parser)
+
+---
+
+<CodeLayout>
+
+## Setup 🛠
+
+1. Do the Boosters [Initial Setup](https://github.com/Accenture/digital-products-boosters#initial-setup) if you have not done so.
+
+2. Setup a local Postgres database. You can either:
+  
+  a. Install using the `brew install postgres`
+
+  b. Install Docker Desktop (`brew cask install docker`), then run:
+
+```bash
+docker run -d --rm -p 5432:5432 postgres
+# Explanation of arguments
+# -d Runs as a daemon (in the background)
+# --rm Removes the docker container once it stops
+# -p 5432:5432 Binds port 5432 in the container to the same port on the host
+```
+
+</CodeLayout>
+
+---
+
+<CodeLayout>
+
+## Setup 🛠 - cont.
+
+3. From the root of the `digital-products-boosters` repository, run:
+
+```bash
+$ cd boosters/node-beginner/meeting-4
+$ git pull
+$ asdf install
+$ yarn install
+$ yarn setup:test
+$ yarn test # you should see failing tests
+```
+
+</CodeLayout>
+
+---
+
+# Discussion Questions 🤔
+
+_To be discussed during the meeting_
+
+---
+
+# Discussion Question #1
+
+What is the purpose of using the `Body parser` middleware when retrieving information from the client?
+
+<MinuteTimer minutes={5} isDiscussion />
+
+---
+
+# Discussion Question #1 - Answer
+
+NodeJS receives `POST` or `PUT` request data as a `ReadableStream` object. In order to access that data, you would need to read the stream into a Buffer, then convert it to a string (or whichever content type is being sent by the client). The `Body parser` middleware simplifies that process by handling that extract/conversion process, then attaching it to the `request` object for further middleware layers to use.
+
+---
+
+# Exercises 💪🏼
+
+_To be completed during the meeting_
+
+---
+
+# Exercise 0
+
+1. Complete the [Setup](/2) if you haven't done so already.
+2. Get the failing tests to pass, by updating component file(s) as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 0 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 1
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+src/tests/01_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the file(s) as necessary.
+
+<MinuteTimer minutes={10} />
+
+---
+
+# Exercise 1 - Answer
+
+[Click to see answer]()
+
+---
+
+# Exercise 2
+
+1. Within the meeting folder, change `xit` to `it` in
+
+```bash
+src/tests/02_exercise.test.js
+```
+
+2. Get the failing tests to pass, by updating the file(s) as necessary.
+
+<MinuteTimer minutes={15} />
+
+---
+
+# Exercise 2 - Answer
+
+[Click to see answer]()
+
+---
+
+# Thanks for boosting!
+
+Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️

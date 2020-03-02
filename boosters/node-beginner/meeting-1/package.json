@@ -1,0 +1,19 @@
+{
+  "name": "digital-products-node-beginner-meeting-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test jest -i --colors"
+  },
+  "author": "",
+  "license": "ISC",
+  "prettier": {
+    "singleQuote": false,
+    "trailingComma": "es5",
+    "printWidth": 100
+  }
+}
