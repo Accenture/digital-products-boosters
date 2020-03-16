@@ -14,7 +14,7 @@ describe('exercise 05', () => {
   beforeEach(async () => (values = await setup('05')));
   afterEach(teardown);
 
-  xit('should return the expected response', async () => {
+  it('should return the expected response', async () => {
     const { db, EXERCISE_QUERY, testClient } = values;
     const user = await db.user.create(userData);
     const response = await testClient.query({

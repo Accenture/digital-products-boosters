@@ -1,8 +1,8 @@
 const resolvers = {
-  // Mutation: require('./mutation'),
+  Mutation: require('./mutation'),
   Query: require('./query'),
-  // Repository: require('./repository'),
-  // User: require('./user'),
+  Repository: require('./repository'),
+  User: require('./user'),
 };
 
 module.exports = resolvers;

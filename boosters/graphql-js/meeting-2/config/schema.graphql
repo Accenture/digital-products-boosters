@@ -1,3 +1,43 @@
+input CreateUserInput {
+  bio: String
+  firstName: String!
+  lastName: String!
+  pictureUrl: String
+  username: String!
+}
+
+type CreateUserPayload {
+  user: User
+}
+
 type Query {
+  myArrayField: [String!]!
+  myBooleanField: Boolean!
+  myIntegerField: Int!
+  myTextField: String!
   testField: String!
+  repository(id: ID!): Repository
+  user(id: ID!): User
+  users: [User!]!
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): CreateUserPayload
+}
+
+type Repository {
+  id: ID!
+  name: String!
+  user: User!
+}
+
+type User {
+  bio: String
+  firstName: String!
+  fullName: String!
+  id: ID!
+  lastName: String!
+  pictureUrl: String
+  repositories: [Repository!]!
+  username: String!
 }

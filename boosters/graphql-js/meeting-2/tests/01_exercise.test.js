@@ -6,7 +6,7 @@ describe('exercise 01', () => {
   beforeEach(async () => (values = await setup('01')));
   afterEach(teardown);
 
-  xit('should return the expected response', async () => {
+  it('should return the expected response', async () => {
     const { EXERCISE_QUERY, testClient } = values;
     const response = await testClient.query({ query: EXERCISE_QUERY });
 
