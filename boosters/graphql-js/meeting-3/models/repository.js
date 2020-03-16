@@ -1,4 +1,8 @@
+const DataLoader = require('dataloader');
+
 module.exports = (sequelize, DataTypes) => {
+  const { Op } = sequelize;
+
   const Repository = sequelize.define(
     'repository',
     {
@@ -13,9 +17,32 @@ module.exports = (sequelize, DataTypes) => {
   Repository.associate = function(models) {
     Repository.belongsTo(models.user);
   };
-  Repository.gen = async () => {
-    //TODO: Implement me!
+
+  const batchGetRepositories = async keys => {
+    const [{ currentUserId }] = keys;
+    const ids = keys.map(key => key.id);
+    const repositories = await Repository.findAll({
+      where: {
+        [sequelize.Op.or]: [
+          { id: { [Op.in]: ids }, isPrivate: false },
+          { id: { [Op.in]: ids }, isPrivate: true, userId: currentUserId },
+        ],
+      },
+    });
+
+    return ids.map(
+      id => repositories.find(repository => repository.id === id) || null,
+    );
   };
+
+  const repositoryLoader = new DataLoader(keys => batchGetRepositories(keys));
+
+  Repository.gen = async (id, currentUser) => {
+    const key = { currentUserId: currentUser.id, id };
+    const repository = await repositoryLoader.load(key);
+    return repository;
+  };
+
   return Repository;
 };
 

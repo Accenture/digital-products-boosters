@@ -24,7 +24,7 @@ describe('exercise 04 - gen method on Repository class', () => {
   beforeEach(async () => (values = await setup()));
   afterAll(teardown);
 
-  xit('should efficiently load repositories via batching', async () => {
+  it('should efficiently load repositories via batching', async () => {
     const { db } = values;
     const currentUser = await db.user.create(currentUserData);
     const repository1 = await db.repository.create(repositoryData1);

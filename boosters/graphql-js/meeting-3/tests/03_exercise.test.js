@@ -32,7 +32,7 @@ describe('exercise 03', () => {
   beforeEach(async () => (values = await setup('03', currentUserData)));
   afterAll(teardown);
 
-  xit('should return response with repository if id is for public repository', async () => {
+  it('should return response with repository if id is for public repository', async () => {
     const { db, EXERCISE_QUERY, testClient } = values;
     await db.repository.create(randomRepositoryData);
     const otherUser = await db.user.create(otherUserData);
@@ -52,7 +52,7 @@ describe('exercise 03', () => {
     });
   });
 
-  xit('should return response with repository if id is for private repository owned by user', async () => {
+  it('should return response with repository if id is for private repository owned by user', async () => {
     const { currentUser, db, EXERCISE_QUERY, testClient } = values;
     await db.repository.create(randomRepositoryData);
     repositoryData.isPrivate = true;
@@ -72,7 +72,7 @@ describe('exercise 03', () => {
     });
   });
 
-  xit('should return response with null if id is for private repository not owned by user', async () => {
+  it('should return response with null if id is for private repository not owned by user', async () => {
     const { db, EXERCISE_QUERY, testClient } = values;
     await db.repository.create(randomRepositoryData);
     const otherUser = await db.user.create(otherUserData);
