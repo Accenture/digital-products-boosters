@@ -3,6 +3,7 @@ const resolvers = {
   Mutation: require('./mutation'),
   Query: require('./query'),
   Repository: require('./repository'),
+  RepositoryCollaboratorsEdge: require('./repository-collaborators-edge'),
   User: require('./user'),
 };
 
