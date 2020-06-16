@@ -1,8 +1,5 @@
 <template>
-  <div class="comment">
-    <span>{{ text }}</span>
-    <span> - {{ user.firstName }} {{ user.lastName }}</span>
-  </div>
+  <div class="comment"></div>
 </template>
 
 <script src="./comment.js"></script>

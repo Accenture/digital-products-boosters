@@ -1,9 +1,5 @@
 <template>
-  <div class="bike_image">
-    <img :alt="name" :src="imageUrl" />
-    <div class="title">{{ name }}</div>
-    <CommentsSection :comments="comments" />
-  </div>
+  <div class="bike_image"></div>
 </template>
 
 <script src="./bike_image.js"></script>
