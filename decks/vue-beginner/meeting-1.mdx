@@ -179,6 +179,188 @@ for more expensive calculations.
 
 ---
 
+# Exercise 0
+
+In the `/boosters/vue-beginner/meeting-1` dir, run
+```bash
+yarn test exercise-0
+```
+
+Address the failing tests in `comment.vue` to build the `Comment` component.
+
+---
+# Exercise 0 Solution
+```
+<template>
+  <div class="comment">
+    <span>{{ text }}</span>
+    <span>- {{ user.firstName }} {{ user.lastName }}</span>
+  </div>
+</template>
+```
+---
+
+# Exercise 1
+
+In the `/boosters/vue-beginner/meeting-1` dir, run
+```bash
+yarn test exercise-1
+```
+Address the failing tests in `comments_section.vue` to build the `CommentsSection` component.
+
+---
+# Exercise 1 Solution
+```
+<template>
+  <div class="comments_section">
+    <template v-if="comments && comments.length > 0">
+      <div class="comment_item" :key="comment.id" v-for="comment in comments">
+        <Comment :user="comment.user" :text="comment.text" />
+      </div>
+    </template>
+    <template v-else>
+      No comments
+    </template>
+  </div>
+</template>
+```
+---
+# Exercise 1 Bonus
+
+Conditional rendering with a `template` element vs `div`.
+
+<Split>
+
+```
+<div v-if="true">
+  <div>Hello World</div>
+</div>
+//Compiles to:
+<div>
+  <div>Hello World</div>
+</div>
+```
+```
+<template v-if="true">
+  <div>Hello World</div>
+</template>
+//Compiles to:
+
+<div>Hello World</div>
+
+```
+
+</Split>
+
+---
+
+# Exercise 1 Double Bonus
+
+[Do not use `v-if` and `v-for` on the same element](https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential)
+
+If you do `v-for` will be prioritized higher than `v-if`, which may cause unnecessary
+expensive looping for a list that will not get rendered anyway. See this docs link for
+a more detailed explanation.
+
+---
+
+# Exercise 2
+
+In the `/boosters/vue-beginner/meeting-1` dir, run
+
+```bash
+yarn test exercise-2
+```
+
+Address the failing tests in `bike_image.vue` to build the `BikeImage` component.
+
+---
+# Exercise 2 Solution
+```
+<template>
+  <div class="bike_image">
+    <img :src="imageUrl" />
+    <div>{{name}}</div>
+    <CommentsSection :comments="comments" />
+  </div>
+</template>
+```
+---
+# Exercise 3
+
+In the `/boosters/vue-beginner/meeting-1` dir, run
+
+```bash
+yarn test exercise-3
+```
+
+Address the failing tests in `counter.vue` to build the `Counter` component.
+
+Note that the bikes in your data include `increment` and `decrement` functions aleady.
+
+---
+# Exercise 3 Solution
+```
+<template>
+  <div class="counter">
+    <span class="btn decrementer" @click="bike.decrement()">-</span>
+    <span class="total">{{ bike.qty }}</span>
+    <span class="btn incrementer" @click="bike.increment()">+</span>
+  </div>
+</template>
+```
+---
+
+# Exercise 4
+
+In the `/boosters/vue-beginner/meeting-1` dir, run
+
+```bash
+yarn test exercise-4
+```
+
+Address the failing tests in `inventory.vue` to build the `Inventory` component.
+
+---
+# Exercise 4 Solution
+```
+<template>
+  <div class="inventory">
+    <div>Price: $ {{ bike.price }}</div>
+    <Counter :bike="bike" />
+    <div>Stock Value: $ {{stockValue}}</div>
+  </div>
+</template>
+```
+---
+
+# Exercise 5
+
+In the `/boosters/vue-beginner/meeting-1` dir, run
+
+```bash
+yarn test exercise-5
+```
+
+Address the failing tests in `bike-viewer.vue` to build the `BikeViewer` component.
+
+---
+# Exercise 5 Solution
+```
+<template>
+  <div class="bike_viewer">
+    <button class="previous" @click="previousSlide()">PREVIOUS</button>
+    <button class="next" @click="nextSlide()">NEXT</button>
+    <BikeImage
+      :comments="activeBike.comments"
+      :name="activeBike.name"
+      :image-url="activeBike.bikeImage"
+    />
+    <Inventory :bike="activeBike" />
+  </div>
+</template>
+```
+---
 # Thanks for boosting!
 
 Have feedback? Please [Click here](https://github.com/Accenture/digital-products-boosters/issues/new?assignees=&labels=&template=feedback.md&title=%5BFEEDBACK%5D) to let us know 🙇‍♀️🙇‍♂️
