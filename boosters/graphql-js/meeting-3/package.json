@@ -17,7 +17,7 @@
     "setup:test": "NODE_ENV=test yarn db:create && NODE_ENV=test yarn db:migrate"
   },
   "dependencies": {
-    "apollo-server": "^2.2.6",
+    "apollo-server": "^2.25.3",
     "apollo-server-testing": "^2.2.6",
     "dataloader": "^1.4.0",
     "dotenv": "^6.0.0",
